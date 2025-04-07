@@ -1,26 +1,24 @@
-import { useState, useEffect } from "react"
-import { Github, Linkedin, FileText, Sun, Moon, X } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState, useEffect } from "react";
+import { Github, Linkedin, FileText, Sun, Moon, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Card = ({ children }) => (
   <div className="bg-white dark:bg-gray-800 shadow-md rounded-xl p-4">{children}</div>
 );
 
-const CardContent = ({ children, className = "" }) => (
-  <div className={`space-y-2 ${className}`}>{children}</div>
+const CardContent = ({ children }) => (
+  <div className="space-y-2">{children}</div>
 );
 
-const Button = ({ children, variant = "default", className = "", ...props }) => {
+const Button = ({ children, variant = "default", ...props }) => {
   const base = "px-4 py-2 rounded font-medium transition";
   const styles =
     variant === "outline"
       ? "border border-gray-500 text-gray-700 dark:text-gray-200 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-700"
-      : variant === "ghost"
-      ? "text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
       : "bg-blue-600 text-white hover:bg-blue-700";
 
   return (
-    <button className={`${base} ${styles} ${className}`} {...props}>
+    <button className={`${base} ${styles}`} {...props}>
       {children}
     </button>
   );
@@ -72,19 +70,24 @@ const ranks = {
 export default function Portfolio() {
   const [filter, setFilter] = useState("All")
   const [isDark, setIsDark] = useState(false)
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false);
+
 
   useEffect(() => {
-    if (isDark) document.documentElement.classList.add("dark")
-    else document.documentElement.classList.remove("dark")
+    if (isDark) {
+      document.documentElement.classList.add("dark")
+    } else {
+      document.documentElement.classList.remove("dark")
+    }
   }, [isDark])
 
-  const filteredCourses = filter === "All" ? courses : courses.filter((c) => c.category === filter)
+  const filteredCourses =
+    filter === "All" ? courses : courses.filter((c) => c.category === filter)
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-50 to-white text-gray-800 dark:bg-gray-900 dark:text-gray-100 p-4 md:p-8 space-y-12">
 
-  {/* Hero Section */}
+      {/* Hero Section */}
       <section className="text-center space-y-4">
         <div className="flex justify-end">
           <Button variant="ghost" onClick={() => setIsDark(!isDark)}>
@@ -148,8 +151,8 @@ export default function Portfolio() {
           </Card>
         </div>
 
-        {/* Modal */}
-        <AnimatePresence>
+         {/* Modal */}
+         <AnimatePresence>
           {modalOpen && (
             <motion.div
               className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50"
@@ -206,8 +209,8 @@ export default function Portfolio() {
           ))}
         </div>
       </section>
-      
-      {/* Coast Guard Experience */}
+
+{/* Coast Guard Experience */}
       <section className="space-y-6 max-w-4xl mx-auto">
         <h2 className="text-3xl font-semibold text-center">Military Experience</h2>
         <p className="text-center max-w-2xl mx-auto">Over 17 years of service in the United States Coast Guard as an Information Systems Technician with leadership, instructional, and hands-on technical responsibilities.</p>
