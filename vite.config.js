@@ -1,8 +1,13 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'path'  // ✅ import path
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/', // Change to your repo name if not using custom domain
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),  // ✅ set up alias
+    },
+  },
 })
+
