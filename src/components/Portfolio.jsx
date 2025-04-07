@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Github, Linkedin, FileText, Sun, Moon } from "lucide-react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 
 const courses = [
   { code: "CS 215", title: "Programming II", category: "Computer Science" },
