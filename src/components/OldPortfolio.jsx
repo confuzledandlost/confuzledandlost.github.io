@@ -1,8 +1,28 @@
-import { useState, useEffect } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Github, Linkedin, FileText, Sun, Moon } from "lucide-react"
-import { motion } from "framer-motion"
+import { useState, useEffect } from "react";
+import { Github, Linkedin, FileText, Sun, Moon, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const Card = ({ children }) => (
+  <div className="bg-white dark:bg-gray-800 shadow-md rounded-xl p-4">{children}</div>
+);
+
+const CardContent = ({ children }) => (
+  <div className="space-y-2">{children}</div>
+);
+
+const Button = ({ children, variant = "default", ...props }) => {
+  const base = "px-4 py-2 rounded font-medium transition";
+  const styles =
+    variant === "outline"
+      ? "border border-gray-500 text-gray-700 dark:text-gray-200 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-700"
+      : "bg-blue-600 text-white hover:bg-blue-700";
+
+  return (
+    <button className={`${base} ${styles}`} {...props}>
+      {children}
+    </button>
+  );
+};
 
 const courses = [
   { code: "CS 215", title: "Programming II", category: "Computer Science" },
@@ -50,7 +70,8 @@ const ranks = {
 export default function Portfolio() {
   const [filter, setFilter] = useState("All")
   const [isDark, setIsDark] = useState(false)
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false);
+
 
   useEffect(() => {
     if (isDark) {
@@ -107,14 +128,14 @@ export default function Portfolio() {
       <section className="space-y-6">
         <h2 className="text-3xl font-semibold text-center">Featured Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-	  <Card>
+          <Card>
             <CardContent className="space-y-2">
               <h3 className="text-xl font-bold">HTML Parser</h3>
               <p>A C++ program that parses and validates HTML structure using a tokenizer and tag stack.</p>
               <Button variant="outline" onClick={() => setModalOpen(true)}>View More</Button>
             </CardContent>
           </Card>
-	  <Card>
+          <Card>
             <CardContent className="space-y-2">
               <h3 className="text-xl font-bold">Make Simulator</h3>
               <p>A C++ program that simulates the functionality of `make`, building targets from a dependency tree based on timestamp analysis.</p>
@@ -129,8 +150,9 @@ export default function Portfolio() {
             </CardContent>
           </Card>
         </div>
-        {/* Modal */}
-        <AnimatePresence>
+
+         {/* Modal */}
+         <AnimatePresence>
           {modalOpen && (
             <motion.div
               className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50"
