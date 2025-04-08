@@ -1,9 +1,38 @@
+
 /* Layout */
 .main {
   min-height: 100vh;
   background: linear-gradient(to bottom, #f0f9ff, #ffffff);
   color: #1f2937;
   padding: 1rem 2rem;
+}
+
+:global(html.dark) {
+  background-color: #111827;
+}
+
+:global(html.dark) body {
+  background-color: #111827;
+  color: #f3f4f6;
+}
+
+:global(html.dark) .main {
+  background: #111827;
+  color: #f3f4f6;
+}
+
+:global(html.dark) .card {
+  background-color: #1f2937;
+  color: #f3f4f6;
+}
+
+:global(html.dark) .button {
+  background-color: #3b82f6;
+}
+
+:global(html.dark) .modal {
+  background-color: #1f2937;
+  color: #f9fafb;
 }
 
 /* Section Containers */
@@ -200,11 +229,28 @@
   list-style: none;
   padding: 0;
   margin-top: 1rem;
+
+  display: grid;
+  grid-template-columns: 1fr; /* mobile */
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .courseList {
+    grid-template-columns: 1fr 1fr; /* desktop: 2 columns */
+  }
 }
 
 .courseItem {
-  margin-bottom: 0.75rem;
   font-size: 0.95rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #f9fafb;
+  transition: background-color 0.2s;
+}
+
+:global(html.dark) .courseItem {
+  background-color: #1f2937;
 }
 
 .courseCategory {
