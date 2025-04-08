@@ -4,79 +4,6 @@ import { motion, AnimatePresence } from "framer-motion"
 import styles from "./Portfolio.module.css"
 import ranks from "./ranks"
 
-const courses = [
-  { code: "CS 215", title: "Programming II", category: "Computer Science" },
-  { code: "CS 355", title: "Database Mgt System Design", category: "Computer Science" },
-  { code: "CS 315", title: "Data Structures", category: "Computer Science" },
-  { code: "CS 370", title: "Software Design & Development", category: "Computer Science" },
-  { code: "CS 340", title: "Computer Security and Malware", category: "Computer Science" },
-  { code: "CS 351", title: "Computer Architecture", category: "Computer Science" },
-  { code: "CS 390", title: "Computer Science Colloquium", category: "Computer Science" },
-  { code: "CS 415", title: "Algorithm Analysis", category: "Computer Science" },
-  { code: "CS 460", title: "Programming Languages", category: "Computer Science" },
-  { code: "CS 450", title: "Operating Systems", category: "Computer Science" },
-  { code: "CS 454", title: "Theory of Computation", category: "Computer Science" },
-  { code: "CS 495", title: "Quant Comp Sim & Visual Tutor", category: "Computer Science" },
-  { code: "CS 496", title: "Senior Research Project", category: "Computer Science" },
-  { code: "CS 50A", title: "Web Development 1", category: "Computer Science" },
-  { code: "CS 10A", title: "Intro to Programming", category: "Computer Science" },
-  { code: "CS 10B", title: "Programming Concepts", category: "Computer Science" },
-  { code: "CS 12", title: "Assembly Programming", category: "Computer Science" },
-  { code: "CS 81.21", title: "Intro to Linux", category: "Computer Science" },
-  { code: "CYB 220", title: "Network Security", category: "Cybersecurity" },
-  { code: "CYB 230", title: "Operating System Security", category: "Cybersecurity" },
-  { code: "CYB 240", title: "Application Security", category: "Cybersecurity" },
-  { code: "CYB 250", title: "Cyber Defense", category: "Cybersecurity" },
-  { code: "CYB 260", title: "Legal Cybersecurity", category: "Cybersecurity" },
-  { code: "CYB 300", title: "System and Communication Security", category: "Cybersecurity" },
-  { code: "CYB 310", title: "Network Defense", category: "Cybersecurity" },
-  { code: "CYB 320", title: "Incident Response and Investigation", category: "Cybersecurity" },
-  { code: "CYB 400", title: "Security Assessment and Auditing", category: "Cybersecurity" },
-  { code: "CSCI 420", title: "Quantum Computing for CS", category: "Computer Science" },
-  { code: "IT-145", title: "Foundations in App Development (Java)", category: "IT" },
-  { code: "IT-140", title: "Intro to Scripting (Python)", category: "IT" },
-  { code: "IT-201", title: "Computer Operating Systems", category: "IT" },
-  { code: "IT-212", title: "Intro to Computer Networks", category: "IT" }
-]
-
-const military = [
-  {
-    rank: "ITC",
-    title: "ITC – Curriculum Chief, Petaluma, CA (2022–Present)",
-    description: "Oversaw and updated all apprentice-level training material for IT students. Led a curriculum overhaul aligning 40+ objectives with CompTIA and ACE standards. Piloted an AGILE-based fast-track program for experienced members to reduce training time."
-  },
-  {
-    rank: "IT1",
-    title: "IT1 – Lead Instructor, Petaluma, CA (2016–2022)",
-    description: "Instructed over 100 junior enlisted members annually in telecommunications systems, VOIP configuration, analog/digital circuits, and advanced trunking. Developed new materials, mentored students, and served as class advisor to 30+ trainees per cycle."
-  },
-  {
-    rank: "IT2",
-    title: "IT2 – Independent Duty IT, Homer, AK (2014–2016)",
-    description: "Sole technician for shipboard systems supporting 50+ users. Maintained routers, switches, Windows servers, printers, and workstations. Configured equipment for sonar data collection to create navigational maps of Alaskan waterways."
-  },
-  {
-    rank: "IT2",
-    title: "IT2 – IT Technician, San Diego, CA (2013–2014)",
-    description: "Deployed and reinstalled all IT infrastructure for the Pacific Tactical Law Enforcement Team relocation. Implemented backup schedules and a tracking system for routine server data recovery and audits."
-  },
-  {
-    rank: "IT2",
-    title: "IT2 – Forward-Deployed IT, Manama, Bahrain (2012–2013)",
-    description: "Maintained systems for over 150 users across 6 deployable cutters. Repaired critical navigation and communication equipment in Kuwait. Oversaw Windows 8 migration across 200+ systems, ensured compatibility and end-user support."
-  },
-  {
-    rank: "IT3",
-    title: "IT3 – Shipboard IT, Kodiak, AK (2009–2012)",
-    description: "Managed full network and communications stack aboard a Coast Guard cutter in the Bering Sea. Supported classified networks and resolved system issues in extreme conditions."
-  },
-  {
-    rank: "Seaman",
-    title: "Seaman – Galveston, TX (2008–2009)",
-    description: "Early-career experience aboard a 210’ ship in the Gulf of Mexico and Caribbean. Maintained ship readiness and developed foundational maritime and IT skills."
-  }
-];
-
 const Card = ({ children }) => (
   <div className={styles.card}>{children}</div>
 );
@@ -99,7 +26,7 @@ const Button = ({ children, variant = "default", className = "", ...props }) => 
 };
 
 export default function Portfolio() {
-  const [filter, setFilter] = useState("All")
+  const [filter, setFilter] = useState("Computer Science")
   const [isDark, setIsDark] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -107,6 +34,18 @@ export default function Portfolio() {
     if (isDark) document.documentElement.classList.add("dark")
     else document.documentElement.classList.remove("dark")
   }, [isDark])
+
+  useEffect(() => {
+    if (modalOpen) document.body.style.overflow = "hidden"
+    else document.body.style.overflow = ""
+  }, [modalOpen])
+
+const categories = ['Computer Science', 'Cybersecurity', 'IT', 'All'];
+
+const getCategoryCount = (category) =>
+  category === 'All'
+    ? courses.length
+    : courses.filter((c) => c.category === category).length;
 
   const filteredCourses =
     filter === "All" ? courses : courses.filter((c) => c.category === filter)
@@ -181,7 +120,7 @@ export default function Portfolio() {
                   </ul>
                 </div>
                 <div className={styles.downloadLinkWrapper}>
-                  <a href="/downloads/html-parser.zip" className={styles.downloadLink}>Download Code (ZIP)</a>
+                  <a href="/downloads/html-parser.zip" className={styles.downloadLink} download>Download Code (ZIP)</a>
                 </div>
               </motion.div>
             </motion.div>
@@ -192,12 +131,16 @@ export default function Portfolio() {
       <section className={styles.sectionWide}>
         <h2 className={styles.sectionTitle}>Course History</h2>
         <div className={styles.filterButtons}>
-          {['All', 'Computer Science', 'Cybersecurity', 'IT'].map(category => (
-            <Button key={category} variant={filter === category ? 'default' : 'outline'} onClick={() => setFilter(category)}>
-              {category}
-            </Button>
-          ))}
-        </div>
+	  {categories.map(category => (
+	    <Button
+	      key={category}
+	      variant={filter === category ? 'default' : 'outline'}
+	      onClick={() => setFilter(category)}
+	    >
+	      {category} ({getCategoryCount(category)})
+	    </Button>
+	  ))}
+	</div>
         <ul className={styles.courseList}>
           {filteredCourses.map((course, index) => (
             <li key={index} className={styles.courseItem}>
@@ -226,17 +169,122 @@ export default function Portfolio() {
       </section>
 
       <section className={styles.sectionWide}>
-        <h2 className={styles.sectionTitle}>Resume</h2>
-        <div className={styles.resumeViewer}>
-          <embed src="/Resume.pdf" type="application/pdf" width="100%" height="800px" />
-        </div>
+	  <h2 className={styles.sectionTitle}>Resume</h2>
+	  <div className={styles.resumeViewer}>
+	  <object
+	    data="/Resume.pdf"
+	    type="application/pdf"
+	    width="100%"
+	    height="800px"
+	  >
+	    <p>It appears your browser doesn't support embedded PDFs. 
+	      <a href="/Resume.pdf" download>Click here to download the resume</a> instead.
+	    </p>
+	  </object>
+	</div>
       </section>
 
       <section className={styles.sectionWide}>
         <h2 className={styles.sectionTitle}>Contact</h2>
-        <p>You can reach me via LinkedIn, GitHub, or by reviewing my resume above. I'm always open to exciting career opportunities or collaborations.</p>
+        <p>You can reach me via LinkedIn, GitHub, or by reviewing my resume above.</p>
+      </section>
+
+      <section className={styles.sectionCentered}>
+        <div className={styles.iconRow}>
+          <a href="https://github.com/confuzledandlost" target="_blank" rel="noopener noreferrer">
+            <Github />
+          </a>
+          <a href="https://www.linkedin.com/in/brandon-robinson-uscg/" target="_blank" rel="noopener noreferrer">
+            <Linkedin />
+          </a>
+          <a href="/Resume.pdf" target="_blank" rel="noopener noreferrer">
+            <FileText />
+          </a>
+        </div>
       </section>
     </main>
   )
 }
+
+const courses = [
+  { code: "CYB 420", title: "Enterprise Security", category: "Cybersecurity" },
+  { code: "CYB 410", title: "Security Risk Management", category: "Cybersecurity" },
+  { code: "CYB 400", title: "Security Assessment and Auditing", category: "Cybersecurity" },
+  { code: "CYB 320", title: "Incident Response and Investigation", category: "Cybersecurity" },
+  { code: "CYB 310", title: "Network Defense", category: "Cybersecurity" },
+  { code: "CYB 300", title: "System and Communication Security", category: "Cybersecurity" },
+  { code: "CYB 260", title: "Legal Cybersecurity", category: "Cybersecurity" },
+  { code: "CYB 250", title: "Cyber Defense", category: "Cybersecurity" },
+  { code: "CYB 240", title: "Application Security", category: "Cybersecurity" },
+  { code: "CYB 230", title: "Operating System Security", category: "Cybersecurity" },
+  { code: "CYB 220", title: "Network Security", category: "Cybersecurity" },
+  { code: "CYB 210", title: "Computer Networking", category: "Cybersecurity" },
+  { code: "CYB 200", title: "Cybersecurity Foundations", category: "Cybersecurity" },
+  { code: "CS 496", title: "Senior Research Project", category: "Computer Science" },
+  { code: "CS 495", title: "Quant Comp Sim & Visual Tutor", category: "Computer Science" },
+  { code: "CS 460", title: "Programming Languages (C++)", category: "Computer Science" },
+  { code: "CS 454", title: "Theory of Computation", category: "Computer Science" },
+  { code: "CS 450", title: "Operating Systems (C)", category: "Computer Science" },
+  { code: "CS 415", title: "Algorithm Analysis", category: "Computer Science" },
+  { code: "CSCI 420", title: "Quantum Computing for CS", category: "Computer Science" },
+  { code: "CS 391", title: "Computing Professions", category: "Computer Science" },
+  { code: "CS 390", title: "Computer Science Colloquium", category: "Computer Science" },
+  { code: "CS 370", title: "Software Design & Development (Unreal/C++", category: "Computer Science" },
+  { code: "CS 250", title: "Software Development Lifecycle", category: "Computer Science" },
+  { code: "CS 355", title: "Database Mgt System Design (SQL)", category: "Computer Science" },
+  { code: "CS 351", title: "Computer Architecture (LEGV8)", category: "Computer Science" },
+  { code: "CS 340", title: "Computer Security and Malware", category: "Computer Science" },
+  { code: "CS 315", title: "Data Structures (C++)", category: "Computer Science" },
+  { code: "CS 215", title: "Programming II (C++)", category: "Computer Science" },
+  { code: "CS 210", title: "Programming Languages (Python, Java, C++)", category: "Computer Science" },
+  { code: "IT 235", title: "Database Design", category: "IT" },
+  { code: "IT 212", title: "Intro to Computer Networks", category: "IT" },
+  { code: "IT 201", title: "Computer Operating Systems", category: "IT" },
+  { code: "IT 200", title: "Fundamentals of Info Tech", category: "IT" },
+  { code: "IT 145", title: "Foundations in App Development (Java)", category: "IT" },
+  { code: "IT 140", title: "Intro to Scripting (Python)", category: "IT" },
+  { code: "CS 81.21", title: "Intro to Linux", category: "Computer Science" },
+  { code: "CS 50A", title: "Web Development 1 (HTML/CSS)", category: "Computer Science" },
+  { code: "CS 12", title: "Assembly Programming (ARM64)", category: "Computer Science" },
+  { code: "CS 10B", title: "Programming Concepts (C++)", category: "Computer Science" },
+  { code: "CS 10A", title: "Intro to Programming (C++)", category: "Computer Science" }
+]
+
+const military = [
+  {
+    rank: "ITC",
+    title: "ITC – Curriculum Chief, Petaluma, CA (2022–Present)",
+    description: "Oversaw and updated all apprentice-level training material for IT students. Led a curriculum overhaul aligning 40+ objectives with CompTIA and ACE standards. Piloted an AGILE-based fast-track program for experienced members to reduce training time."
+  },
+  {
+    rank: "IT1",
+    title: "IT1 – Lead Instructor, Petaluma, CA (2016–2022)",
+    description: "Instructed over 100 junior enlisted members annually in telecommunications systems, VOIP configuration, analog/digital circuits, and advanced trunking. Developed new materials, mentored students, and served as class advisor to 30+ trainees per cycle."
+  },
+  {
+    rank: "IT2",
+    title: "IT2 – Independent Duty IT, Homer, AK (2014–2016)",
+    description: "Sole technician for shipboard systems supporting 50+ users. Maintained routers, switches, Windows servers, printers, and workstations. Configured equipment for sonar data collection to create navigational maps of Alaskan waterways."
+  },
+  {
+    rank: "IT2",
+    title: "IT2 – IT Technician, San Diego, CA (2013–2014)",
+    description: "Deployed and reinstalled all IT infrastructure for the Pacific Tactical Law Enforcement Team relocation. Implemented backup schedules and a tracking system for routine server data recovery and audits."
+  },
+  {
+    rank: "IT2",
+    title: "IT2 – Forward-Deployed IT, Manama, Bahrain (2012–2013)",
+    description: "Maintained systems for over 150 users across 6 deployable cutters. Repaired critical navigation and communication equipment in Kuwait. Oversaw Windows 8 migration across 200+ systems, ensured compatibility and end-user support."
+  },
+  {
+    rank: "IT3",
+    title: "IT3 – Shipboard IT, Kodiak, AK (2009–2012)",
+    description: "Managed full network and communications stack aboard a Coast Guard cutter in the Bering Sea. Supported classified networks and resolved system issues in extreme conditions."
+  },
+  {
+    rank: "Seaman",
+    title: "Seaman – Galveston, TX (2008–2009)",
+    description: "Early-career experience aboard a 210’ ship in the Gulf of Mexico and Caribbean. Maintained ship readiness and developed foundational maritime and IT skills."
+  }
+];
 
