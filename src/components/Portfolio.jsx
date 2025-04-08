@@ -27,10 +27,10 @@ const Button = ({ children, variant = "default", className = "", ...props }) => 
 
 export default function Portfolio() {
   const [filter, setFilter] = useState("Computer Science")
-  const [modalOpen, setModalOpen] = useState(false)
   const [showResume, setShowResume] = useState(false);
   const [showCourses, setShowCourses] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
+  const modalOpen = selectedProject !== null
   const [isDark, setIsDark] = useState(() => {
   const savedTheme = localStorage.getItem('theme')
   return savedTheme === null ? true : savedTheme === 'dark'
@@ -45,7 +45,7 @@ useEffect(() => {
   useEffect(() => {
     if (modalOpen) document.body.style.overflow = "hidden"
     else document.body.style.overflow = ""
-  }, [modalOpen])
+  }, [selectedProject])
 
 const categories = ['Computer Science', 'Cybersecurity', 'IT', 'All'];
 
@@ -78,13 +78,13 @@ const getCategoryCount = (category) =>
         </p>
         <div className={styles.iconRow}>
           <a href="https://github.com/confuzledandlost" target="_blank" rel="noopener noreferrer">
-            <Github />
+            <Github className={styles.icon} />
           </a>
           <a href="https://www.linkedin.com/in/brandon-robinson-uscg/" target="_blank" rel="noopener noreferrer">
-            <Linkedin />
+            <Linkedin className={styles.icon}/>
           </a>
           <a href="/Resume.pdf" target="_blank" rel="noopener noreferrer">
-            <FileText />
+            <FileText className={styles.icon}/>
           </a>
         </div>
       </section>
@@ -99,40 +99,73 @@ const getCategoryCount = (category) =>
       <section className={styles.sectionNarrow}>
         <h2 className={styles.sectionTitle}>Featured Projects</h2>
         <div className={styles.cardGrid}>
-          <Card>
-            <CardContent>
-              <h3 className={styles.cardTitle}>HTML Parser</h3>
-              <p>A C++ program that parses and validates HTML structure using a tokenizer and tag stack.</p>
-              <Button variant="outline" onClick={() => setModalOpen(true)}>View More</Button>
-            </CardContent>
-          </Card>
+	  {projects.map((project) => (
+	    <Card key={project.id}>
+	      <CardContent>
+		<h3 className={styles.cardTitle}>{project.title}</h3>
+		<p>{project.description}</p>
+		<Button variant="outline" onClick={() => {
+		  setSelectedProject(project)
+		}}>
+        	  View More
+      		</Button>
+    	      </CardContent>
+  	    </Card>
+	  ))}
         </div>
 
-        <AnimatePresence>
-          {modalOpen && (
-            <motion.div className={styles.modalOverlay} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <motion.div className={styles.modal} initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 50, opacity: 0 }}>
-                <button onClick={() => setModalOpen(false)} className={styles.modalClose}>
-                  <X />
-                </button>
-                <h3 className={styles.modalTitle}>HTML Parser (C++)</h3>
-                <p>This project parses and validates an HTML document, ensuring that all opening and closing tags are properly matched. It uses a custom tokenizer to identify tags and a stack to manage nesting.</p>
-                <p className={styles.modalSubtitle}>Course: CS 315 – Data Structures</p>
-                <div>
-                  <h4 className={styles.modalSubheading}>Key Challenges:</h4>
-                  <ul className={styles.list}>
-                    <li>Learning how HTML structure works from scratch</li>
-                    <li>Implementing a tokenizer to extract valid tag tokens</li>
-                    <li>Managing tag state with a custom stack structure</li>
-                  </ul>
-                </div>
-                <div className={styles.downloadLinkWrapper}>
-                  <a href="/downloads/html-parser.zip" className={styles.downloadLink} download>Download Code (ZIP)</a>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+<AnimatePresence>
+  {selectedProject && (
+    <motion.div
+      className={styles.modalOverlay}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div
+        className={styles.modal}
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 50, opacity: 0 }}
+      >
+        <button
+          onClick={() => setSelectedProject(null)}
+          className={styles.modalClose}
+        >
+          <X />
+        </button>
+
+        <h3 className={styles.modalTitle}>{selectedProject.title}</h3>
+        <p>{selectedProject.description}</p>
+        <p className={styles.modalSubtitle}>Course: {selectedProject.course}</p>
+
+        {selectedProject.challenges && (
+          <div>
+            <h4 className={styles.modalSubheading}>Key Challenges:</h4>
+            <ul className={styles.list}>
+              {selectedProject.challenges.map((challenge, index) => (
+                <li key={index}>{challenge}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {selectedProject.download && (
+          <div className={styles.downloadLinkWrapper}>
+            <a
+              href={selectedProject.download}
+              className={styles.downloadLink}
+              download
+            >
+              Download Code (ZIP)
+            </a>
+          </div>
+        )}
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
       </section>
 
       <section className={styles.sectionWide}>
@@ -237,21 +270,18 @@ const getCategoryCount = (category) =>
   </AnimatePresence>
 </section>
 
-      <section className={styles.sectionNarrow}>
+      <section className={styles.sectionCentered}>
         <h2 className={styles.sectionTitle}>Contact</h2>
         <p>You can reach me via LinkedIn, GitHub, or by reviewing my resume above.</p>
-      </section>
-
-      <section className={styles.sectionCentered}>
         <div className={styles.iconRow}>
           <a href="https://github.com/confuzledandlost" target="_blank" rel="noopener noreferrer">
-            <Github />
+            <Github className={styles.icon}/>
           </a>
           <a href="https://www.linkedin.com/in/brandon-robinson-uscg/" target="_blank" rel="noopener noreferrer">
-            <Linkedin />
+            <Linkedin className={styles.icon}/>
           </a>
           <a href="/Resume.pdf" target="_blank" rel="noopener noreferrer">
-            <FileText />
+            <FileText className={styles.icon}/>
           </a>
         </div>
       </section>
@@ -343,22 +373,16 @@ const military = [
 
 const projects = [
   {
-    id: "html-parser",
-    title: "HTML Parser",
-    description: "A C++ program that parses and validates HTML structure using a tokenizer and tag stack.",
-    tags: ["C++", "Data Structures", "Algorithms"],
-    image: "/images/html-parser.png", // Add a placeholder if you don't have images yet
-    repoLink: "https://github.com/yourusername/html-parser",
-    demoLink: null, // Can be null for projects without demos
-    details: {
-      description: "This project parses and validates an HTML document, ensuring that all opening and closing tags are properly matched. It uses a custom tokenizer to identify tags and a stack to manage nesting.",
-      course: "CS 315 – Data Structures",
-      challenges: [
-        "Learning how HTML structure works from scratch",
-        "Implementing a tokenizer to extract valid tag tokens",
-        "Managing tag state with a custom stack structure"
-      ],
-      downloadUrl: "/downloads/html-parser.zip"
-    }
-  },
+    id: 1,
+    title: "HTML Parser (C++)",
+    description: "This project parses and validates an HTML document, ensuring that all opening and closing tags are properly matched. It uses a custom tokenizer to identify tags and a stack to manage nesting.",
+    course: "CS 315 – Data Structures",
+    challenges: [
+      "Learning how HTML structure works with no prior HTML experience",
+      "Implementing a tokenizer (for the first time) to extract valid tag tokens",
+      "Managing tag state with a custom stack structure",
+      "Properly handling malformed tags and other nasty edge-cases."
+    ],
+    download: "/downloads/html-parser.zip"
+  }
 ];

@@ -5,7 +5,7 @@
 /* Layout */
 .main {
   min-height: 100vh;
-  background: linear-gradient(to bottom, #f0f9ff, #ffffff);
+  background: #E8E9EB;
   color: #1f2937;
   padding: 1rem 2rem;
 }
@@ -38,6 +38,9 @@
   color: #f9fafb;
 }
 
+:global(html.dark) .icon {
+  color: #f3f4f6; /* light gray for dark mode */
+}
 /* Section Containers */
 .sectionCentered {
   text-align: center;
@@ -47,15 +50,15 @@
 .sectionNarrow {
   max-width: 768px;
   margin: 0 auto 3rem;
-  text-align: center;
 }
 
 .sectionWide {
+  max-width: 980px;
   margin: 0 auto 3rem;
-  max-width: 1024px;
 }
 
 .sectionTitle {
+  text-align: center;
   font-size: 1.875rem;
   font-weight: 600;
   margin-bottom: 1rem;
@@ -89,7 +92,13 @@
 .icon {
   width: 1.25rem;
   height: 1.25rem;
+  color: #374151;
+  transition: color 0.3s ease;
 }
+.icon:hover {
+  color: #60a5fa; /* lighter blue or pick any accent */
+}
+
 
 /* Cards */
 .card {
