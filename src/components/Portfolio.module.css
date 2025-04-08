@@ -41,6 +41,11 @@
 :global(html.dark) .icon {
   color: #f3f4f6; /* light gray for dark mode */
 }
+
+:global(html.dark) .icon:hover {
+  color: #60a5fa; /* soft blue for dark mode hover */
+}
+
 /* Section Containers */
 .sectionCentered {
   text-align: center;
@@ -312,3 +317,38 @@
   height: 40px;
 }
 
+.modalImage {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+}
+
+.stackRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.stackTag {
+  background-color: #e5e7eb;
+  color: #111827;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+}
+
+:global(html.dark) .stackTag {
+  background-color: #374151;
+  color: #f3f4f6;
+}
+
+.modalLink a {
+  color: #2563eb;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+  display: inline-block;
+}

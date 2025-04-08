@@ -116,29 +116,54 @@ const getCategoryCount = (category) =>
 
 <AnimatePresence>
   {selectedProject && (
-    <motion.div
-      className={styles.modalOverlay}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <motion.div
-        className={styles.modal}
-        initial={{ y: 50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: 50, opacity: 0 }}
-      >
-        <button
-          onClick={() => setSelectedProject(null)}
-          className={styles.modalClose}
-        >
+    <motion.div className={styles.modalOverlay}
+  	initial={{ opacity: 0 }}
+  	animate={{ opacity: 1 }}
+	exit={{ opacity: 0 }}
+	>
+      <motion.div className={styles.modal}
+	initial={{ y: 50, opacity: 0 }}
+  	animate={{ y: 0, opacity: 1 }}
+  	exit={{ y: 50, opacity: 0 }}
+	>
+
+        <button onClick={() => setSelectedProject(null)} className={styles.modalClose}>
           <X />
         </button>
 
+        {/* Title and Description */}
         <h3 className={styles.modalTitle}>{selectedProject.title}</h3>
         <p>{selectedProject.description}</p>
         <p className={styles.modalSubtitle}>Course: {selectedProject.course}</p>
 
+        {/* GitHub Link */}
+        {selectedProject.github && (
+          <p className={styles.modalLink}>
+            <a href={selectedProject.github} target="_blank" rel="noopener noreferrer">
+              View on GitHub
+            </a>
+          </p>
+        )}
+
+        {/* Stack Tags */}
+        {selectedProject.stack && (
+          <div className={styles.stackRow}>
+            {selectedProject.stack.map((tech, index) => (
+              <span key={index} className={styles.stackTag}>{tech}</span>
+            ))}
+          </div>
+        )}
+
+        {/* Screenshot Image */}
+        {selectedProject.image && (
+          <img
+            src={selectedProject.image}
+            alt={selectedProject.title}
+            className={styles.modalImage}
+          />
+        )}
+
+        {/* Challenges List */}
         {selectedProject.challenges && (
           <div>
             <h4 className={styles.modalSubheading}>Key Challenges:</h4>
@@ -150,6 +175,7 @@ const getCategoryCount = (category) =>
           </div>
         )}
 
+        {/* Download Button */}
         {selectedProject.download && (
           <div className={styles.downloadLinkWrapper}>
             <a
@@ -161,10 +187,12 @@ const getCategoryCount = (category) =>
             </a>
           </div>
         )}
+
       </motion.div>
     </motion.div>
   )}
 </AnimatePresence>
+
 
       </section>
 
@@ -376,13 +404,32 @@ const projects = [
     id: 1,
     title: "HTML Parser (C++)",
     description: "This project parses and validates an HTML document, ensuring that all opening and closing tags are properly matched. It uses a custom tokenizer to identify tags and a stack to manage nesting.",
-    course: "CS 315 – Data Structures",
-    challenges: [
-      "Learning how HTML structure works with no prior HTML experience",
-      "Implementing a tokenizer (for the first time) to extract valid tag tokens",
-      "Managing tag state with a custom stack structure",
-      "Properly handling malformed tags and other nasty edge-cases."
-    ],
-    download: "/downloads/html-parser.zip"
-  }
+  course: "CS 315 – Data Structures",
+  challenges: [
+    "Learning how HTML structure works with no prior HTML experience",
+    "Implementing a tokenizer (for the first time) to extract valid tag tokens",
+    "Managing tag state with a custom stack structure",
+    "Properly handling malformed tags and other nasty edge-cases."
+  ],
+  stack: ["C++", "Tokenizer", "Parser", "Custom Stack"],
+  github: "https://github.com/confuzledandlost/HTML_Parser",
+  image: "/images/projects/html-parser.png",
+  download: "/downloads/html-parser.zip"
+  },
+  {
+  id: 2,
+  title: "Personal Portfolio Website",
+  description: "A fully custom, dynamic, and mobile-responsive portfolio built with React and Vite. Showcases military experience, academic coursework, and software projects with clean modals and dark mode support.",
+  course: "Personal Project",
+  challenges: [
+    "Migrating from Tailwind to CSS Modules for full styling control",
+    "Deploying with GitHub Pages using Vite’s build pipeline",
+    "Creating a dynamic modal system for project content",
+    "Integrating transcripts and auto-sorting course history"
+  ],
+  stack: ["React", "Vite", "CSS Modules", "Framer Motion", "GitHub Pages"],
+  github: "https://github.com/confuzledandlost/confuzledandlost.github.io",
+  image: "/images/projects/portfolio-site.png",
+  download: null
+}
 ];
