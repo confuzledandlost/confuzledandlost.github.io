@@ -4,7 +4,7 @@ This is my personal portfolio site, built with **React**, **Tailwind CSS**, and 
 
 ## 🚀 Features
 
-- Responsive and modern layout using Tailwind CSS
+- Responsive and modern layout with JS, React, and CSS
 - Dark/light mode toggle
 - Filterable course history (CS, Cybersecurity, IT)
 - Detailed military experience with rank insignias
@@ -14,16 +14,5 @@ This is my personal portfolio site, built with **React**, **Tailwind CSS**, and 
 ## 🛠️ Tech Stack
 
 - React
-- Tailwind CSS
 - Framer Motion
 - Lucide React (icons)
-
-## 📦 Installation
-
-Clone the repository:
-
-```bash
-git clone https://github.com/YOUR-USERNAME/portfolio.git
-cd portfolio
-npm install
-npm start
