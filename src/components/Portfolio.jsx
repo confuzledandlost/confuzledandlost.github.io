@@ -27,13 +27,20 @@ const Button = ({ children, variant = "default", className = "", ...props }) => 
 
 export default function Portfolio() {
   const [filter, setFilter] = useState("Computer Science")
-  const [isDark, setIsDark] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
+  const [showResume, setShowResume] = useState(false);
+  const [showCourses, setShowCourses] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [isDark, setIsDark] = useState(() => {
+  const savedTheme = localStorage.getItem('theme')
+  return savedTheme === null ? true : savedTheme === 'dark'
+})
 
-  useEffect(() => {
-    if (isDark) document.documentElement.classList.add("dark")
-    else document.documentElement.classList.remove("dark")
-  }, [isDark])
+useEffect(() => {
+  if (isDark) document.documentElement.classList.add("dark")
+  else document.documentElement.classList.remove("dark")
+  localStorage.setItem('theme', isDark ? 'dark' : 'light')
+}, [isDark])
 
   useEffect(() => {
     if (modalOpen) document.body.style.overflow = "hidden"
@@ -89,7 +96,7 @@ const getCategoryCount = (category) =>
         </p>
       </section>
 
-      <section className={styles.sectionWide}>
+      <section className={styles.sectionNarrow}>
         <h2 className={styles.sectionTitle}>Featured Projects</h2>
         <div className={styles.cardGrid}>
           <Card>
@@ -129,28 +136,48 @@ const getCategoryCount = (category) =>
       </section>
 
       <section className={styles.sectionWide}>
-        <h2 className={styles.sectionTitle}>Course History</h2>
-        <div className={styles.filterButtons}>
-	  {categories.map(category => (
-	    <Button
-	      key={category}
-	      variant={filter === category ? 'default' : 'outline'}
-	      onClick={() => setFilter(category)}
-	    >
-	      {category} ({getCategoryCount(category)})
+	<h2 className={styles.sectionTitle}>Professional/Academic Credentials</h2>
+	  <p>
+	    Throughout my IT career, I have obtained various CompTIA certifications like A+ and Net+, as well as Master Training Specialist for curriculum development. I am graduating from Sonoma State University with a Bachelor of Science in Computer Science with distinction and honors. Additionaly, while on active duty, I obtained a Bachelor of Science in Cybersecurity with an Applied Mathematics Minor and highest honors.
+	  </p>
+	  <div className={styles.viewButtonContainer}>
+	    <Button onClick={() => setShowCourses(!showCourses)}>
+	      {showCourses ? "Hide Course History" : "View Course History"}
 	    </Button>
-	  ))}
-	</div>
-        <ul className={styles.courseList}>
-          {filteredCourses.map((course, index) => (
-            <li key={index} className={styles.courseItem}>
-              <strong>{course.code}</strong>: {course.title} <span className={styles.courseCategory}>({course.category})</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+	  </div>
 
-      <section className={styles.sectionWide}>
+	  <AnimatePresence>
+	    {showCourses && (
+	      <motion.div
+		initial={{ opacity: 0, height: 0, overflow: "hidden" }}
+		animate={{ opacity: 1, height: "auto", overflow: "visible" }}
+		exit={{ opacity: 0, height: 0, overflow: "hidden" }}
+		transition={{ duration: 0.5, ease: "easeInOut" }}
+	      >
+		<div className={styles.filterButtons}>
+		  {categories.map(category => (
+		    <Button
+		      key={category}
+		      variant={filter === category ? 'default' : 'outline'}
+		      onClick={() => setFilter(category)}
+		>
+                  {category} ({getCategoryCount(category)})
+            	</Button>
+	      ))}
+            </div>
+	    <ul className={styles.courseList}>
+	      {filteredCourses.map((course, index) => (
+            	<li key={index} className={styles.courseItem}>
+              	<strong>{course.code}</strong>: {course.title} <span className={styles.courseCategory}>({course.category})</span>
+            	</li>
+              ))}
+	    </ul>
+      	  </motion.div>
+    	)}
+      </AnimatePresence>
+    </section>
+
+      <section className={styles.sectionNarrow}>
         <h2 className={styles.sectionTitle}>Military Experience</h2>
         <p className={styles.textCenter}>Over 17 years of service in the United States Coast Guard as an Information Systems Technician with leadership, instructional, and hands-on technical responsibilities.</p>
         <div className={styles.rankGrid}>
@@ -167,24 +194,50 @@ const getCategoryCount = (category) =>
           ))}
         </div>
       </section>
+     
+      <section className={styles.sectionCentered}>
+  <h2 className={styles.sectionTitle}>Resume</h2>
+  
+  <div className={styles.resumeButtons}>
+    <Button onClick={() => setShowResume(!showResume)}>
+      {showResume ? "Hide Resume" : "View Resume"}
+    </Button>
+    <Button variant="outline">
+      <a 
+        href="/Resume.pdf" 
+        download 
+        style={{ textDecoration: 'none', color: 'inherit' }}
+      >
+        Download Resume
+      </a>
+    </Button>
+  </div>
+  
+  <AnimatePresence>
+    {showResume && (
+      <motion.div 
+        className={styles.resumeViewer}
+        initial={{ opacity: 0, height: 0, overflow: "hidden" }}
+        animate={{ opacity: 1, height: "800px", overflow: "hidden" }}
+        exit={{ opacity: 0, height: 0, overflow: "hidden" }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+      >
+        <object
+          data="/Resume.pdf"
+          type="application/pdf"
+          width="100%"
+          height="100%"
+        >
+          <p>It appears your browser doesn't support embedded PDFs. 
+             <a href="/Resume.pdf" download>Click here to download the resume</a> instead.
+          </p>
+        </object>
+      </motion.div>
+    )}
+  </AnimatePresence>
+</section>
 
-      <section className={styles.sectionWide}>
-	  <h2 className={styles.sectionTitle}>Resume</h2>
-	  <div className={styles.resumeViewer}>
-	  <object
-	    data="/Resume.pdf"
-	    type="application/pdf"
-	    width="100%"
-	    height="800px"
-	  >
-	    <p>It appears your browser doesn't support embedded PDFs. 
-	      <a href="/Resume.pdf" download>Click here to download the resume</a> instead.
-	    </p>
-	  </object>
-	</div>
-      </section>
-
-      <section className={styles.sectionWide}>
+      <section className={styles.sectionNarrow}>
         <h2 className={styles.sectionTitle}>Contact</h2>
         <p>You can reach me via LinkedIn, GitHub, or by reviewing my resume above.</p>
       </section>
@@ -288,3 +341,24 @@ const military = [
   }
 ];
 
+const projects = [
+  {
+    id: "html-parser",
+    title: "HTML Parser",
+    description: "A C++ program that parses and validates HTML structure using a tokenizer and tag stack.",
+    tags: ["C++", "Data Structures", "Algorithms"],
+    image: "/images/html-parser.png", // Add a placeholder if you don't have images yet
+    repoLink: "https://github.com/yourusername/html-parser",
+    demoLink: null, // Can be null for projects without demos
+    details: {
+      description: "This project parses and validates an HTML document, ensuring that all opening and closing tags are properly matched. It uses a custom tokenizer to identify tags and a stack to manage nesting.",
+      course: "CS 315 – Data Structures",
+      challenges: [
+        "Learning how HTML structure works from scratch",
+        "Implementing a tokenizer to extract valid tag tokens",
+        "Managing tag state with a custom stack structure"
+      ],
+      downloadUrl: "/downloads/html-parser.zip"
+    }
+  },
+];
