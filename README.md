@@ -1,6 +1,6 @@
 # Brandon Robinson – Portfolio Website
 
-This is my personal portfolio site, built with **React**, **Tailwind CSS**, and **Framer Motion**, to showcase my programming projects, course history, military experience, and resume. It features interactive components like dark mode, project modals, and course filtering.
+This is my personal portfolio site, built with **React**, **CSS**, and **Framer Motion**, to showcase my programming projects, course history, military experience, and resume. It features interactive components like dark mode, project modals, and course filtering.
 
 ## 🚀 Features
 
