@@ -1,3 +1,6 @@
+:global(html) {
+  scroll-behavior: smooth;
+}
 
 /* Layout */
 .main {
@@ -151,6 +154,11 @@
   color: #111827;
 }
 
+.viewButtonContainer {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
 /* Modal */
 .modalOverlay {
   position: fixed;
