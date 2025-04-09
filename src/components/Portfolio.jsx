@@ -431,5 +431,23 @@ const projects = [
   github: "https://github.com/confuzledandlost/confuzledandlost.github.io",
   image: "/images/projects/portfolio-site.png",
   download: null
+},
+{
+  id: 3,
+  title: "Make Simulator (C++)",
+  description: "A simplified implementation of the UNIX `make` utility that builds a dependency graph, detects cycles, and executes shell commands based on a custom makefile format.",
+  course: "CS 450 – Operating Systems",
+  challenges: [
+    "Parsing custom makefile syntax using tokenization",
+    "Constructing and traversing a dependency graph",
+    "Detecting and preventing cyclic dependencies",
+    "Handling shell command execution with system calls",
+    "Timestamp validation for rebuild logic"
+  ],
+  stack: ["C++17", "Makefile", "Dependency Graph", "Tokenizer", "System Calls"],
+  github: "https://github.com/confuzledandlost/Make_Simulator",
+  image: "/images/projects/make-simulator.png",
+  download: "/downloads/html-parser.zip"
 }
+
 ];

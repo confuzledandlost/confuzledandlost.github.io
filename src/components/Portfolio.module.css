@@ -179,31 +179,42 @@
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   z-index: 50;
+  padding: 1rem;
 }
+
 
 .modal {
-  background: white;
-  color: #1f2937;
-  border-radius: 1rem;
-  padding: 2rem;
-  max-width: 640px;
-  width: 100%;
+  background-color: white;
+  color: #111827;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
   position: relative;
+  box-shadow: 0 0 20px rgba(0,0,0,0.15);
 }
 
-.modalClose {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  color: #6b7280;
-  background: transparent;
-  border: none;
-  font-size: 1.25rem;
-  cursor: pointer;
+:global(html.dark) .modal {
+  background-color: #1f2937;
+  color: #f3f4f6;
 }
+
+
+.modalClose {
+  position: sticky;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  color: inherit;
+  z-index: 10;
+}
+
 
 .modalClose:hover {
   color: #dc2626;
