@@ -4,8 +4,22 @@ import { motion, AnimatePresence } from "framer-motion"
 import styles from "./Portfolio.module.css"
 import ranks from "./ranks"
 
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 }
+  }
+};
+
 const Card = ({ children }) => (
-  <div className={styles.card}>{children}</div>
+  <motion.div
+    className={styles.card}
+    variants={fadeInUp}
+  >
+    {children}
+  </motion.div>
 );
 
 const CardContent = ({ children, className = "" }) => (
@@ -19,47 +33,92 @@ const Button = ({ children, variant = "default", className = "", ...props }) => 
     ghost: styles.buttonGhost
   }
   return (
-    <button className={`${styleMap[variant] || styleMap.default} ${className}`} {...props}>
+    <motion.button
+      className={`${styleMap[variant] || styleMap.default} ${className}`}
+      {...props}
+      variants={fadeInUp}
+    >
       {children}
-    </button>
-  );
+    </motion.button>
+  )
 };
 
 export default function Portfolio() {
   const [filter, setFilter] = useState("Computer Science")
-  const [showResume, setShowResume] = useState(false);
-  const [showCourses, setShowCourses] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(null);
-  const modalOpen = selectedProject !== null
+  const [showResume, setShowResume] = useState(false)
+  const [showCourses, setShowCourses] = useState(false)
+  const [selectedProject, setSelectedProject] = useState(null)
+  const [loading, setLoading] = useState(true)
   const [isDark, setIsDark] = useState(() => {
-  const savedTheme = localStorage.getItem('theme')
-  return savedTheme === null ? true : savedTheme === 'dark'
-})
+    const savedTheme = localStorage.getItem('theme')
+    return savedTheme === null ? true : savedTheme === 'dark'
+  })
 
-useEffect(() => {
-  if (isDark) document.documentElement.classList.add("dark")
-  else document.documentElement.classList.remove("dark")
-  localStorage.setItem('theme', isDark ? 'dark' : 'light')
-}, [isDark])
+  const modalOpen = selectedProject !== null
+
+  useEffect(() => {
+    localStorage.setItem('theme', isDark ? 'dark' : 'light')
+    if (isDark) document.documentElement.classList.add("dark")
+    else document.documentElement.classList.remove("dark")
+  }, [isDark])
 
   useEffect(() => {
     if (modalOpen) document.body.style.overflow = "hidden"
     else document.body.style.overflow = ""
-  }, [selectedProject])
+  }, [modalOpen])
 
-const categories = ['Computer Science', 'Cybersecurity', 'IT', 'All'];
-
-const getCategoryCount = (category) =>
-  category === 'All'
-    ? courses.length
-    : courses.filter((c) => c.category === category).length;
+  useEffect(() => {
+    const timeout = setTimeout(() => setLoading(false), 2000)
+    return () => clearTimeout(timeout)
+  }, [])
 
   const filteredCourses =
     filter === "All" ? courses : courses.filter((c) => c.category === filter)
 
+  const categories = ["All", "Computer Science", "Cybersecurity", "IT"]
+
+  const getCategoryCount = (category) =>
+    category === "All"
+      ? courses.length
+      : courses.filter((c) => c.category === category).length
+
+  if (loading) {
+    return (
+      <motion.div
+        className={styles.splash}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        <motion.div
+          className={styles.spinner}
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        />
+        <h1 className={styles.splashTitle}>Brandon Robinson</h1>
+      </motion.div>
+    )
+  }
+
   return (
-    <main className={styles.main}>
-      <section className={styles.sectionCentered}>
+    <motion.main
+      className={styles.main}
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: {},
+        visible: {
+          transition: {
+            staggerChildren: 0.25 // delay between children
+          }
+        }
+      }}
+    >
+      <motion.section
+        className={styles.sectionCentered}
+        variants={fadeInUp}
+      >
         <div className={styles.themeToggleRow}>
           <Button variant="ghost" onClick={() => setIsDark(!isDark)}>
             {isDark ? <Sun className={styles.icon} /> : <Moon className={styles.icon} />}
@@ -67,181 +126,271 @@ const getCategoryCount = (category) =>
         </div>
         <motion.h1
           className={styles.heroTitle}
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          variants={fadeInUp}
         >
           Brandon Robinson
         </motion.h1>
-        <p className={styles.heroSubtitle}>
+        <motion.p
+          className={styles.heroSubtitle}
+          variants={fadeInUp}
+        >
           Chief Information Systems Technician | Aspiring Software Engineer
-        </p>
-        <div className={styles.iconRow}>
-          <a href="https://github.com/confuzledandlost" target="_blank" rel="noopener noreferrer">
-            <Github className={styles.icon} />
-          </a>
-          <a href="https://www.linkedin.com/in/brandon-robinson-uscg/" target="_blank" rel="noopener noreferrer">
-            <Linkedin className={styles.icon}/>
-          </a>
-          <a href="/Resume.pdf" target="_blank" rel="noopener noreferrer">
-            <FileText className={styles.icon}/>
-          </a>
-        </div>
-      </section>
+        </motion.p>
+        <motion.div
+          className={styles.iconRow}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.125
+              }
+            }
+          }}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.a
+            href="https://github.com/confuzledandlost"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.icon}
+            variants={fadeInUp}
+          >
+            <Github />
+          </motion.a>
+          <motion.a
+            href="https://www.linkedin.com/in/brandon-robinson-uscg/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.icon}
+            variants={fadeInUp}
+          >
+            <Linkedin />
+          </motion.a>
+          <motion.a
+            href="/Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.icon}
+            variants={fadeInUp}
+          >
+            <FileText />
+          </motion.a>
+        </motion.div>
+      </motion.section>
 
-      <section className={styles.sectionNarrow}>
-        <h2 className={styles.sectionTitle}>About Me</h2>
-        <p>
+      <motion.section
+        className={styles.sectionNarrow}
+        variants={fadeInUp}
+      >
+        <motion.h2 className={styles.sectionTitle}
+          variants={fadeInUp}
+        >
+          About Me
+        </motion.h2>
+        <motion.p
+          variants={fadeInUp}
+        >
           I’m a U.S. Coast Guard Chief Information Systems Technician and full-time Computer Science major at Sonoma State University. With a background in cybersecurity, curriculum development, and IT infrastructure, I’m pivoting into software engineering and academic research in computer science.
-        </p>
-      </section>
+        </motion.p>
+      </motion.section>
 
-      <section className={styles.sectionNarrow}>
-        <h2 className={styles.sectionTitle}>Featured Projects</h2>
-        <div className={styles.cardGrid}>
-	  {projects.map((project) => (
-	    <Card key={project.id}>
-	      <CardContent>
-		<h3 className={styles.cardTitle}>{project.title}</h3>
-		<p>{project.description}</p>
-		<Button variant="outline" onClick={() => {
-		  setSelectedProject(project)
-		}}>
-        	  View More
-      		</Button>
-    	      </CardContent>
-  	    </Card>
-	  ))}
-        </div>
+      <motion.section className={styles.sectionNarrow}
+        variants={fadeInUp}
+      >
+        <motion.h2 className={styles.sectionTitle}
+          variants={fadeInUp}
+        >
+          Featured Projects
+        </motion.h2>
+        <motion.div
+          className={styles.cardGrid}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.125
+              }
+            }
+          }}
+          initial="hidden"
+          animate="visible"
+        >
 
-<AnimatePresence>
-  {selectedProject && (
-    <motion.div className={styles.modalOverlay}
-  	initial={{ opacity: 0 }}
-  	animate={{ opacity: 1 }}
-	exit={{ opacity: 0 }}
-	>
-      <motion.div className={styles.modal}
-	initial={{ y: 50, opacity: 0 }}
-  	animate={{ y: 0, opacity: 1 }}
-  	exit={{ y: 50, opacity: 0 }}
-	>
+          {projects.map((project) => (
+            <Card key={project.id}>
+              <CardContent>
+                <motion.h3 className={styles.cardTitle} variants={fadeInUp}>
+                  {project.title}
+                </motion.h3>
 
-        <button onClick={() => setSelectedProject(null)} className={styles.modalClose}>
-          <X />
-        </button>
+                <motion.p variants={fadeInUp}>
+                  {project.description}
+                </motion.p>
 
-        {/* Title and Description */}
-        <h3 className={styles.modalTitle}>{selectedProject.title}</h3>
-        <p>{selectedProject.description}</p>
-        <p className={styles.modalSubtitle}>Course: {selectedProject.course}</p>
+                <Button variant="outline" onClick={() => {
+                  setSelectedProject(project)
+                }}>
+                  View More
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </motion.div>
 
-        {/* GitHub Link */}
-        {selectedProject.github && (
-          <p className={styles.modalLink}>
-            <a href={selectedProject.github} target="_blank" rel="noopener noreferrer">
-              View on GitHub
-            </a>
-          </p>
-        )}
-
-        {/* Stack Tags */}
-        {selectedProject.stack && (
-          <div className={styles.stackRow}>
-            {selectedProject.stack.map((tech, index) => (
-              <span key={index} className={styles.stackTag}>{tech}</span>
-            ))}
-          </div>
-        )}
-
-        {/* Screenshot Image */}
-        {selectedProject.image && (
-          <img
-            src={selectedProject.image}
-            alt={selectedProject.title}
-            className={styles.modalImage}
-          />
-        )}
-
-        {/* Challenges List */}
-        {selectedProject.challenges && (
-          <div>
-            <h4 className={styles.modalSubheading}>Key Challenges:</h4>
-            <ul className={styles.list}>
-              {selectedProject.challenges.map((challenge, index) => (
-                <li key={index}>{challenge}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {/* Download Button */}
-        {selectedProject.download && (
-          <div className={styles.downloadLinkWrapper}>
-            <a
-              href={selectedProject.download}
-              className={styles.downloadLink}
-              download
+        <AnimatePresence>
+          {selectedProject && (
+            <motion.div className={styles.modalOverlay}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
             >
-              Download Code (ZIP)
-            </a>
-          </div>
-        )}
+              <motion.div className={styles.modal}
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 50, opacity: 0 }}
+              >
 
-      </motion.div>
-    </motion.div>
-  )}
-</AnimatePresence>
+                <button onClick={() => setSelectedProject(null)} className={styles.modalClose}>
+                  <X />
+                </button>
+
+                {/* Title and Description */}
+                <h3 className={styles.modalTitle}>{selectedProject.title}</h3>
+                <p>{selectedProject.description}</p>
+                <p className={styles.modalSubtitle}>Course: {selectedProject.course}</p>
+
+                {/* GitHub Link */}
+                {selectedProject.github && (
+                  <p className={styles.modalLink}>
+                    <a href={selectedProject.github} target="_blank" rel="noopener noreferrer">
+                      View on GitHub
+                    </a>
+                  </p>
+                )}
+
+                {/* Stack Tags */}
+                {selectedProject.stack && (
+                  <div className={styles.stackRow}>
+                    {selectedProject.stack.map((tech, index) => (
+                      <span key={index} className={styles.stackTag}>{tech}</span>
+                    ))}
+                  </div>
+                )}
+
+                {/* Screenshot Image */}
+                {selectedProject.image && (
+                  <img
+                    src={selectedProject.image}
+                    alt={selectedProject.title}
+                    className={styles.modalImage}
+                  />
+                )}
+
+                {/* Challenges List */}
+                {selectedProject.challenges && (
+                  <div>
+                    <h4 className={styles.modalSubheading}>Key Challenges:</h4>
+                    <ul className={styles.list}>
+                      {selectedProject.challenges.map((challenge, index) => (
+                        <li key={index}>{challenge}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Download Button */}
+                {selectedProject.download && (
+                  <div className={styles.downloadLinkWrapper}>
+                    <a
+                      href={selectedProject.download}
+                      className={styles.downloadLink}
+                      download
+                    >
+                      Download Code (ZIP)
+                    </a>
+                  </div>
+                )}
+
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
 
-      </section>
+      </motion.section>
 
-      <section className={styles.sectionWide}>
-	<h2 className={styles.sectionTitle}>Professional/Academic Credentials</h2>
-	  <p>
-	    Throughout my IT career, I have obtained various CompTIA certifications like A+ and Net+, as well as Master Training Specialist for curriculum development. I am graduating from Sonoma State University with a Bachelor of Science in Computer Science with distinction and honors. Additionaly, while on active duty, I obtained a Bachelor of Science in Cybersecurity with an Applied Mathematics Minor and highest honors.
-	  </p>
-	  <div className={styles.viewButtonContainer}>
-	    <Button onClick={() => setShowCourses(!showCourses)}>
-	      {showCourses ? "Hide Course History" : "View Course History"}
-	    </Button>
-	  </div>
+      <motion.section
+        className={styles.sectionWide}
+        variants={fadeInUp}
+      >
+        <motion.h2
+          className={styles.sectionTitle}
+          variants={fadeInUp}
+        >
+          Professional/Academic Credentials
+        </motion.h2>
+        <motion.p
+          variants={fadeInUp}
+        >
+          Throughout my IT career, I have obtained various CompTIA certifications like A+ and Net+, as well as Master Training Specialist for curriculum development. I am graduating from Sonoma State University with a Bachelor of Science in Computer Science with distinction and honors. Additionaly, while on active duty, I obtained a Bachelor of Science in Cybersecurity with an Applied Mathematics Minor and highest honors.
+        </motion.p>
+        <motion.div className={styles.viewButtonContainer}
+          variants={fadeInUp}
+        >
+          <Button onClick={() => setShowCourses(!showCourses)}>
+            {showCourses ? "Hide Course History" : "View Course History"}
+          </Button>
+        </motion.div>
 
-	  <AnimatePresence>
-	    {showCourses && (
-	      <motion.div
-		initial={{ opacity: 0, height: 0, overflow: "hidden" }}
-		animate={{ opacity: 1, height: "auto", overflow: "visible" }}
-		exit={{ opacity: 0, height: 0, overflow: "hidden" }}
-		transition={{ duration: 0.5, ease: "easeInOut" }}
-	      >
-		<div className={styles.filterButtons}>
-		  {categories.map(category => (
-		    <Button
-		      key={category}
-		      variant={filter === category ? 'default' : 'outline'}
-		      onClick={() => setFilter(category)}
-		>
-                  {category} ({getCategoryCount(category)})
-            	</Button>
-	      ))}
-            </div>
-	    <ul className={styles.courseList}>
-	      {filteredCourses.map((course, index) => (
-            	<li key={index} className={styles.courseItem}>
-              	<strong>{course.code}</strong>: {course.title} <span className={styles.courseCategory}>({course.category})</span>
-            	</li>
-              ))}
-	    </ul>
-      	  </motion.div>
-    	)}
-      </AnimatePresence>
-    </section>
+        <AnimatePresence>
+          {showCourses && (
+            <motion.div
+              initial={{ opacity: 0, height: 0, overflow: "hidden" }}
+              animate={{ opacity: 1, height: "auto", overflow: "visible" }}
+              exit={{ opacity: 0, height: 0, overflow: "hidden" }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+            >
+              <div className={styles.filterButtons}>
+                {categories.map(category => (
+                  <Button
+                    key={category}
+                    variant={filter === category ? 'default' : 'outline'}
+                    onClick={() => setFilter(category)}
+                  >
+                    {category} ({getCategoryCount(category)})
+                  </Button>
+                ))}
+              </div>
+              <ul className={styles.courseList}>
+                {filteredCourses.map((course, index) => (
+                  <li key={index} className={styles.courseItem}>
+                    <strong>{course.code}</strong>: {course.title} <span className={styles.courseCategory}>({course.category})</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.section>
 
-      <section className={styles.sectionNarrow}>
-        <h2 className={styles.sectionTitle}>Military Experience</h2>
-        <p className={styles.textCenter}>Over 17 years of service in the United States Coast Guard as an Information Systems Technician with leadership, instructional, and hands-on technical responsibilities.</p>
-        <div className={styles.rankGrid}>
+      <motion.section
+        className={styles.sectionNarrow}
+        variants={fadeInUp}
+      >
+        <motion.h2 className={styles.sectionTitle}
+          variants={fadeInUp}
+        >
+          Military Experience
+        </motion.h2>
+        <motion.p className={styles.textCenter}
+          variants={fadeInUp}
+        >
+          Over 17 years of service in the United States Coast Guard as an Information Systems Technician with leadership, instructional, and hands-on technical responsibilities.
+        </motion.p>
+        <motion.div className={styles.rankGrid}
+          variants={fadeInUp}
+        >
           {military.map((item, idx) => (
             <Card key={idx}>
               <CardContent>
@@ -249,71 +398,120 @@ const getCategoryCount = (category) =>
                   <img src={ranks[item.rank]} alt={`${item.rank} Rank`} className={styles.rankIcon} />
                   <h3 className={styles.cardTitle}>{item.title}</h3>
                 </div>
-                <p>{item.description}</p>
+                <p variants={fadeInUp}>{item.description}</p>
               </CardContent>
             </Card>
           ))}
-        </div>
-      </section>
-     
-      <section className={styles.sectionCentered}>
-  <h2 className={styles.sectionTitle}>Resume</h2>
-  
-  <div className={styles.resumeButtons}>
-    <Button onClick={() => setShowResume(!showResume)}>
-      {showResume ? "Hide Resume" : "View Resume"}
-    </Button>
-    <Button variant="outline">
-      <a 
-        href="/Resume.pdf" 
-        download 
-        style={{ textDecoration: 'none', color: 'inherit' }}
-      >
-        Download Resume
-      </a>
-    </Button>
-  </div>
-  
-  <AnimatePresence>
-    {showResume && (
-      <motion.div 
-        className={styles.resumeViewer}
-        initial={{ opacity: 0, height: 0, overflow: "hidden" }}
-        animate={{ opacity: 1, height: "800px", overflow: "hidden" }}
-        exit={{ opacity: 0, height: 0, overflow: "hidden" }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
-      >
-        <object
-          data="/Resume.pdf"
-          type="application/pdf"
-          width="100%"
-          height="100%"
-        >
-          <p>It appears your browser doesn't support embedded PDFs. 
-             <a href="/Resume.pdf" download>Click here to download the resume</a> instead.
-          </p>
-        </object>
-      </motion.div>
-    )}
-  </AnimatePresence>
-</section>
+        </motion.div>
+      </motion.section>
 
-      <section className={styles.sectionCentered}>
-        <h2 className={styles.sectionTitle}>Contact</h2>
-        <p>You can reach me via LinkedIn, GitHub, or by reviewing my resume above.</p>
-        <div className={styles.iconRow}>
-          <a href="https://github.com/confuzledandlost" target="_blank" rel="noopener noreferrer">
-            <Github className={styles.icon}/>
-          </a>
-          <a href="https://www.linkedin.com/in/brandon-robinson-uscg/" target="_blank" rel="noopener noreferrer">
-            <Linkedin className={styles.icon}/>
-          </a>
-          <a href="/Resume.pdf" target="_blank" rel="noopener noreferrer">
-            <FileText className={styles.icon}/>
-          </a>
-        </div>
-      </section>
-    </main>
+      <motion.section
+        className={styles.sectionCentered}
+        variants={fadeInUp}
+      >
+        <motion.h2 className={styles.sectionTitle}
+          variants={fadeInUp}
+        >
+          Resume
+        </motion.h2>
+        <motion.div className={styles.resumeButtons}
+          variants={fadeInUp}
+        >
+          <Button onClick={() => setShowResume(!showResume)}>
+            {showResume ? "Hide Resume" : "View Resume"}
+          </Button>
+          <Button variant="outline">
+            <a
+              href="/Resume.pdf"
+              download
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              Download Resume
+            </a>
+          </Button>
+        </motion.div>
+
+        <AnimatePresence>
+          {showResume && (
+            <motion.div
+              className={styles.resumeViewer}
+              initial={{ opacity: 0, height: 0, overflow: "hidden" }}
+              animate={{ opacity: 1, height: "800px", overflow: "hidden" }}
+              exit={{ opacity: 0, height: 0, overflow: "hidden" }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+            >
+              <object
+                data="/Resume.pdf"
+                type="application/pdf"
+                width="100%"
+                height="100%"
+              >
+                <p>It appears your browser doesn't support embedded PDFs.
+                  <a href="/Resume.pdf" download>Click here to download the resume</a> instead.
+                </p>
+              </object>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.section>
+
+      <motion.section
+        className={styles.sectionCentered}
+        variants={fadeInUp}
+      >
+        <motion.h2 className={styles.sectionTitle}
+          variants={fadeInUp}
+        >
+          Contact
+        </motion.h2>
+        <motion.p
+          variants={fadeInUp}
+        >
+          You can reach me via LinkedIn, GitHub, or by reviewing my resume above.
+        </motion.p>
+        <motion.div
+          className={styles.iconRow}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.125
+              }
+            }
+          }}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.a
+            href="https://github.com/confuzledandlost"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.icon}
+            variants={fadeInUp}
+          >
+            <Github />
+          </motion.a>
+          <motion.a
+            href="https://www.linkedin.com/in/brandon-robinson-uscg/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.icon}
+            variants={fadeInUp}
+          >
+            <Linkedin />
+          </motion.a>
+          <motion.a
+            href="/Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.icon}
+            variants={fadeInUp}
+          >
+            <FileText />
+          </motion.a>
+        </motion.div>
+      </motion.section>
+    </motion.main>
   )
 }
 
@@ -404,50 +602,50 @@ const projects = [
     id: 1,
     title: "HTML Parser (C++)",
     description: "This project parses and validates an HTML document, ensuring that all opening and closing tags are properly matched. It uses a custom tokenizer to identify tags and a stack to manage nesting.",
-  course: "CS 315 – Data Structures",
-  challenges: [
-    "Learning how HTML structure works with no prior HTML experience",
-    "Implementing a tokenizer (for the first time) to extract valid tag tokens",
-    "Managing tag state with a custom stack structure",
-    "Properly handling malformed tags and other nasty edge-cases."
-  ],
-  stack: ["C++", "Tokenizer", "Parser", "Custom Stack"],
-  github: "https://github.com/confuzledandlost/HTML_Parser",
-  image: "/images/projects/html-parser.png",
-  download: "/downloads/html-parser.zip"
+    course: "CS 315 – Data Structures",
+    challenges: [
+      "Learning how HTML structure works with no prior HTML experience",
+      "Implementing a tokenizer (for the first time) to extract valid tag tokens",
+      "Managing tag state with a custom stack structure",
+      "Properly handling malformed tags and other nasty edge-cases."
+    ],
+    stack: ["C++", "Tokenizer", "Parser", "Custom Stack"],
+    github: "https://github.com/confuzledandlost/HTML_Parser",
+    image: "/images/projects/html-parser.png",
+    download: "/downloads/html-parser.zip"
   },
   {
-  id: 2,
-  title: "Personal Portfolio Website",
-  description: "A fully custom, dynamic, and mobile-responsive portfolio built with React and Vite. Showcases military experience, academic coursework, and software projects with clean modals and dark mode support.",
-  course: "Personal Project",
-  challenges: [
-    "Migrating from Tailwind to CSS Modules for full styling control",
-    "Deploying with GitHub Pages using Vite’s build pipeline",
-    "Creating a dynamic modal system for project content",
-    "Integrating transcripts and auto-sorting course history"
-  ],
-  stack: ["React", "Vite", "CSS Modules", "Framer Motion", "GitHub Pages"],
-  github: "https://github.com/confuzledandlost/confuzledandlost.github.io",
-  image: "/images/projects/portfolio-site.png",
-  download: null
-},
-{
-  id: 3,
-  title: "Make Simulator (C++)",
-  description: "A simplified implementation of the UNIX `make` utility that builds a dependency graph, detects cycles, and executes shell commands based on a custom makefile format.",
-  course: "CS 450 – Operating Systems",
-  challenges: [
-    "Parsing custom makefile syntax using tokenization",
-    "Constructing and traversing a dependency graph",
-    "Detecting and preventing cyclic dependencies",
-    "Handling shell command execution with system calls",
-    "Timestamp validation for rebuild logic"
-  ],
-  stack: ["C++17", "Makefile", "Dependency Graph", "Tokenizer", "System Calls"],
-  github: "https://github.com/confuzledandlost/Make_Simulator",
-  image: "/images/projects/make-simulator.png",
-  download: "/downloads/html-parser.zip"
-}
+    id: 2,
+    title: "Personal Portfolio Website",
+    description: "A fully custom, dynamic, and mobile-responsive portfolio built with React and Vite. Showcases military experience, academic coursework, and software projects with clean modals and dark mode support.",
+    course: "Personal Project",
+    challenges: [
+      "Migrating from Tailwind to CSS Modules for full styling control",
+      "Deploying with GitHub Pages using Vite’s build pipeline",
+      "Creating a dynamic modal system for project content",
+      "Integrating transcripts and auto-sorting course history"
+    ],
+    stack: ["React", "Vite", "CSS Modules", "Framer Motion", "GitHub Pages"],
+    github: "https://github.com/confuzledandlost/confuzledandlost.github.io",
+    image: "/images/projects/portfolio-site.png",
+    download: null
+  },
+  {
+    id: 3,
+    title: "Make Simulator (C++)",
+    description: "A simplified implementation of the UNIX `make` utility that builds a dependency graph, detects cycles, and executes shell commands based on a custom makefile format.",
+    course: "CS 450 – Operating Systems",
+    challenges: [
+      "Parsing custom makefile syntax using tokenization",
+      "Constructing and traversing a dependency graph",
+      "Detecting and preventing cyclic dependencies",
+      "Handling shell command execution with system calls",
+      "Timestamp validation for rebuild logic"
+    ],
+    stack: ["C++17", "Makefile", "Dependency Graph", "Tokenizer", "System Calls"],
+    github: "https://github.com/confuzledandlost/Make_Simulator",
+    image: "/images/projects/make-simulator.png",
+    download: "/downloads/html-parser.zip"
+  }
 
 ];

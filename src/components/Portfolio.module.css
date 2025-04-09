@@ -39,11 +39,13 @@
 }
 
 :global(html.dark) .icon {
-  color: #f3f4f6; /* light gray for dark mode */
+  color: #f3f4f6;
+  /* light gray for dark mode */
 }
 
 :global(html.dark) .icon:hover {
-  color: #60a5fa; /* soft blue for dark mode hover */
+  color: #60a5fa;
+  /* soft blue for dark mode hover */
 }
 
 /* Section Containers */
@@ -95,13 +97,15 @@
 }
 
 .icon {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 2rem;
+  height: 2rem;
   color: #374151;
   transition: color 0.3s ease;
 }
+
 .icon:hover {
-  color: #60a5fa; /* lighter blue or pick any accent */
+  color: #60a5fa;
+  /* lighter blue or pick any accent */
 }
 
 
@@ -146,15 +150,27 @@
 }
 
 .buttonOutline {
-  background: transparent;
-  color: #4b5563;
-  border: 1px solid #6b7280;
   padding: 0.5rem 1rem;
+  border: 1px solid #374151;
+  background: transparent;
+  color: #374151;
   border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
 .buttonOutline:hover {
   background-color: #f3f4f6;
+}
+
+:global(html.dark) .buttonOutline {
+  border-color: #94a3b8;
+  color: #f9fafb;
+  box-shadow: 0 0 0 1px #94a3b8, 0 1px 4px rgba(255, 255, 255, 0.1);
+}
+
+:global(html.dark) .buttonOutline:hover {
+  background-color: #1e293b;
 }
 
 .buttonGhost {
@@ -168,11 +184,24 @@
   color: #111827;
 }
 
+:global(html.dark) .buttonGhost {
+  color: #f9fafb; /* light text */
+  background: transparent;
+  border: 1px solid #334155;
+  border-radius: 0.5rem;
+}
+
+:global(html.dark) .buttonGhost:hover {
+  color: #e5e7eb;
+  background-color: #1f2937; /* soft dark hover background */
+}
+
 .viewButtonContainer {
   display: flex;
   justify-content: center;
   margin: 1rem 0;
 }
+
 /* Modal */
 .modalOverlay {
   position: fixed;
@@ -195,7 +224,7 @@
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  box-shadow: 0 0 20px rgba(0,0,0,0.15);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 :global(html.dark) .modal {
@@ -264,13 +293,15 @@
   margin-top: 1rem;
 
   display: grid;
-  grid-template-columns: 1fr; /* mobile */
+  grid-template-columns: 1fr;
+  /* mobile */
   gap: 0.75rem;
 }
 
 @media (min-width: 768px) {
   .courseList {
-    grid-template-columns: 1fr 1fr; /* desktop: 2 columns */
+    grid-template-columns: 1fr 1fr;
+    /* desktop: 2 columns */
   }
 }
 
@@ -362,4 +393,41 @@
   font-size: 0.9rem;
   margin-top: 0.75rem;
   display: inline-block;
+}
+
+.splash {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f9fafb;
+  color: #111827;
+  z-index: 9999;
+}
+
+:global(html.dark) .splash {
+  background-color: #0f172a;
+  color: #f1f5f9;
+}
+
+.splashTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+}
+
+.spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid #d1d5db;
+  border-top-color: #2563eb;
+  border-radius: 9999px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
