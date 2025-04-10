@@ -1,32 +1,38 @@
-import { useState, useEffect } from "react"
-import { Github, Linkedin, FileText, Sun, Moon, X } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
-import styles from "./Portfolio.module.css"
-import ranks from "./ranks"
+// Import necessary libraries and components
+import { useState, useEffect } from "react"  // React hooks for state management and side effects
+import { Github, Linkedin, FileText, Sun, Moon, X } from "lucide-react"  // Icon components
+import { motion, AnimatePresence } from "framer-motion"  // Animation library
+import styles from "./Portfolio.module.css"  // CSS module for styling
+import ranks from "./ranks"  // Import rank images
 
+// Animation configuration for fade-in-up effect
 const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 20 },  // Initial state: invisible and 20px down
   visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 }
+    opacity: 1,  // Final state: fully visible
+    y: 0,        // Final position: original position
+    transition: { duration: 0.5 }  // Animation duration
   }
 };
 
+// Card component for consistent card styling and animation
 const Card = ({ children }) => (
   <motion.div
     className={styles.card}
-    variants={fadeInUp}
+    variants={fadeInUp}  // Apply fadeInUp animation
   >
     {children}
   </motion.div>
 );
 
+// CardContent component for consistent content layout within cards
 const CardContent = ({ children, className = "" }) => (
   <div className={`${styles.cardContent} ${className}`}>{children}</div>
 );
 
+// Button component with different variants (default, outline, ghost)
 const Button = ({ children, variant = "default", className = "", animate = true, ...props }) => {
+  // Map button variants to their corresponding CSS classes
   const styleMap = {
     default: styles.button,
     outline: styles.buttonOutline,
@@ -36,52 +42,61 @@ const Button = ({ children, variant = "default", className = "", animate = true,
     <motion.button
       className={`${styleMap[variant] || styleMap.default} ${className}`}
       {...props}
-      variants={animate ? fadeInUp : undefined}
+      variants={animate ? fadeInUp : undefined}  // Only animate if animate prop is true
     >
       {children}
     </motion.button>
   )
 };
 
+// Main Portfolio component
 export default function Portfolio() {
-  const [filter, setFilter] = useState("Computer Science")
-  const [showResume, setShowResume] = useState(false)
-  const [showCourses, setShowCourses] = useState(false)
-  const [selectedProject, setSelectedProject] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [isDark, setIsDark] = useState(() => {
+  // State management using React hooks
+  const [filter, setFilter] = useState("Computer Science")  // Current course filter
+  const [showResume, setShowResume] = useState(false)      // Resume visibility
+  const [showCourses, setShowCourses] = useState(false)    // Course history visibility
+  const [selectedProject, setSelectedProject] = useState(null)  // Selected project for modal
+  const [loading, setLoading] = useState(true)             // Loading state
+  const [isDark, setIsDark] = useState(() => {            // Dark mode state with localStorage
     const savedTheme = localStorage.getItem('theme')
     return savedTheme === null ? true : savedTheme === 'dark'
   })
 
-  const modalOpen = selectedProject !== null
+  const modalOpen = selectedProject !== null  // Helper for modal state
 
+  // Effect for managing dark mode theme
   useEffect(() => {
     localStorage.setItem('theme', isDark ? 'dark' : 'light')
     if (isDark) document.documentElement.classList.add("dark")
     else document.documentElement.classList.remove("dark")
   }, [isDark])
 
+  // Effect for managing body scroll when modal is open
   useEffect(() => {
     if (modalOpen) document.body.style.overflow = "hidden"
     else document.body.style.overflow = ""
   }, [modalOpen])
 
+  // Effect for loading screen timeout
   useEffect(() => {
     const timeout = setTimeout(() => setLoading(false), 2000)
     return () => clearTimeout(timeout)
   }, [])
 
+  // Filter courses based on selected category
   const filteredCourses =
     filter === "All" ? courses : courses.filter((c) => c.category === filter)
 
+  // Available course categories
   const categories = ["All", "Computer Science", "Cybersecurity", "IT"]
 
+  // Helper function to get count of courses in a category
   const getCategoryCount = (category) =>
     category === "All"
       ? courses.length
       : courses.filter((c) => c.category === category).length
 
+  // Loading screen component
   if (loading) {
     return (
       <motion.div
@@ -101,6 +116,7 @@ export default function Portfolio() {
     )
   }
 
+  // Main portfolio layout
   return (
     <motion.main
       className={styles.main}
@@ -110,20 +126,23 @@ export default function Portfolio() {
         hidden: {},
         visible: {
           transition: {
-            staggerChildren: 0.3 // delay between children
+            staggerChildren: 0.3  // Stagger child animations by 0.3s
           }
         }
       }}
     >
+      {/* Hero Section */}
       <motion.section
         className={styles.sectionCentered}
         variants={fadeInUp}
       >
+        {/* Theme Toggle */}
         <div className={styles.themeToggleRow}>
           <Button variant="ghost" onClick={() => setIsDark(!isDark)}>
             {isDark ? <Sun className={styles.icon} /> : <Moon className={styles.icon} />}
           </Button>
         </div>
+        {/* Name and Title */}
         <motion.h1
           className={styles.heroTitle}
           variants={fadeInUp}
@@ -136,6 +155,7 @@ export default function Portfolio() {
         >
           Chief Information Systems Technician | Aspiring Software Engineer
         </motion.p>
+        {/* Social Links */}
         <motion.div
           className={styles.iconRow}
           variants={{
@@ -179,6 +199,7 @@ export default function Portfolio() {
         </motion.div>
       </motion.section>
 
+      {/* About Me Section */}
       <motion.section
         className={styles.sectionNarrow}
         variants={fadeInUp}
@@ -195,6 +216,7 @@ export default function Portfolio() {
         </motion.p>
       </motion.section>
 
+      {/* Featured Projects Section */}
       <motion.section className={styles.sectionNarrow}
         variants={fadeInUp}
       >
@@ -216,18 +238,16 @@ export default function Portfolio() {
           initial="hidden"
           animate="visible"
         >
-
+          {/* Project Cards */}
           {projects.map((project) => (
             <Card key={project.id}>
               <CardContent>
                 <motion.h3 className={styles.cardTitle} variants={fadeInUp}>
                   {project.title}
                 </motion.h3>
-
                 <motion.p variants={fadeInUp}>
                   {project.description}
                 </motion.p>
-
                 <Button variant="outline" onClick={() => {
                   setSelectedProject(project)
                 }}>
@@ -238,6 +258,7 @@ export default function Portfolio() {
           ))}
         </motion.div>
 
+        {/* Project Modal */}
         <AnimatePresence>
           {selectedProject && (
             <motion.div className={styles.modalOverlay}
@@ -250,16 +271,13 @@ export default function Portfolio() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: 50, opacity: 0 }}
               >
-
                 <button onClick={() => setSelectedProject(null)} className={styles.modalClose}>
                   <X />
                 </button>
-
-                {/* Title and Description */}
+                {/* Modal Content */}
                 <h3 className={styles.modalTitle}>{selectedProject.title}</h3>
                 <p>{selectedProject.description}</p>
                 <p className={styles.modalSubtitle}>Course: {selectedProject.course}</p>
-
                 {/* GitHub Link */}
                 {selectedProject.github && (
                   <p className={styles.modalLink}>
@@ -268,8 +286,7 @@ export default function Portfolio() {
                     </a>
                   </p>
                 )}
-
-                {/* Stack Tags */}
+                {/* Tech Stack Tags */}
                 {selectedProject.stack && (
                   <div className={styles.stackRow}>
                     {selectedProject.stack.map((tech, index) => (
@@ -277,8 +294,7 @@ export default function Portfolio() {
                     ))}
                   </div>
                 )}
-
-                {/* Screenshot Image */}
+                {/* Project Screenshot */}
                 {selectedProject.image && (
                   <img
                     src={selectedProject.image}
@@ -286,8 +302,7 @@ export default function Portfolio() {
                     className={styles.modalImage}
                   />
                 )}
-
-                {/* Challenges List */}
+                {/* Project Challenges */}
                 {selectedProject.challenges && (
                   <div>
                     <h4 className={styles.modalSubheading}>Key Challenges:</h4>
@@ -298,8 +313,7 @@ export default function Portfolio() {
                     </ul>
                   </div>
                 )}
-
-                {/* Download Button */}
+                {/* Download Link */}
                 {selectedProject.download && (
                   <div className={styles.downloadLinkWrapper}>
                     <a
@@ -311,15 +325,13 @@ export default function Portfolio() {
                     </a>
                   </div>
                 )}
-
               </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
-
-
       </motion.section>
 
+      {/* Professional/Academic Credentials Section */}
       <motion.section
         className={styles.sectionWide}
         variants={fadeInUp}
@@ -335,6 +347,7 @@ export default function Portfolio() {
         >
           Throughout my IT career, I have obtained various CompTIA certifications like A+ and Net+, as well as Master Training Specialist for curriculum development. I am graduating from Sonoma State University with a Bachelor of Science in Computer Science with distinction and honors. Additionaly, while on active duty, I obtained a Bachelor of Science in Cybersecurity with an Applied Mathematics Minor and highest honors.
         </motion.p>
+        {/* Course History Toggle */}
         <motion.div className={styles.viewButtonContainer}
           variants={fadeInUp}
         >
@@ -343,6 +356,7 @@ export default function Portfolio() {
           </Button>
         </motion.div>
 
+        {/* Course History Section */}
         <AnimatePresence>
           {showCourses && (
             <motion.div
@@ -357,6 +371,7 @@ export default function Portfolio() {
                 }
               }}
             >
+              {/* Filter Buttons */}
               <div className={styles.filterButtons}>
                 {categories.map(category => (
                   <button
@@ -368,6 +383,7 @@ export default function Portfolio() {
                   </button>
                 ))}
               </div>
+              {/* Course List */}
               <ul className={styles.courseList}>
                 {filteredCourses.map((course, index) => (
                   <li key={index} className={styles.courseItem}>
@@ -380,6 +396,7 @@ export default function Portfolio() {
         </AnimatePresence>
       </motion.section>
 
+      {/* Military Experience Section */}
       <motion.section
         className={styles.sectionNarrow}
         variants={fadeInUp}
@@ -394,6 +411,7 @@ export default function Portfolio() {
         >
           Over 17 years of service in the United States Coast Guard as an Information Systems Technician with leadership, instructional, and hands-on technical responsibilities.
         </motion.p>
+        {/* Rank Cards */}
         <motion.div className={styles.rankGrid}
           variants={fadeInUp}
         >
@@ -411,6 +429,7 @@ export default function Portfolio() {
         </motion.div>
       </motion.section>
 
+      {/* Resume Section */}
       <motion.section
         className={styles.sectionCentered}
         variants={fadeInUp}
@@ -420,6 +439,7 @@ export default function Portfolio() {
         >
           Resume
         </motion.h2>
+        {/* Resume Buttons */}
         <motion.div className={styles.resumeButtons}
           variants={fadeInUp}
         >
@@ -437,6 +457,7 @@ export default function Portfolio() {
           </Button>
         </motion.div>
 
+        {/* Resume Viewer */}
         <AnimatePresence>
           {showResume && (
             <motion.div
@@ -461,6 +482,7 @@ export default function Portfolio() {
         </AnimatePresence>
       </motion.section>
 
+      {/* Contact Section */}
       <motion.section
         className={styles.sectionCentered}
         variants={fadeInUp}
@@ -475,6 +497,7 @@ export default function Portfolio() {
         >
           You can reach me via LinkedIn, GitHub, or by reviewing my resume above.
         </motion.p>
+        {/* Social Links */}
         <motion.div
           className={styles.iconRow}
           variants={{
