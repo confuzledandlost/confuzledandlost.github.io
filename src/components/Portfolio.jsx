@@ -1,9 +1,10 @@
 // Import necessary libraries and components
 import { useState, useEffect } from "react"  // React hooks for state management and side effects
 import { Github, Linkedin, FileText, Sun, Moon, X } from "lucide-react"  // Icon components
-import { motion, AnimatePresence } from "framer-motion"  // Animation library
+import { motion, AnimatePresence, hover } from "framer-motion"  // Animation library
 import styles from "./Portfolio.module.css"  // CSS module for styling
 import ranks from "./ranks"  // Import rank images
+import profilePic from "../assets/profile.png"
 
 // Animation configuration for fade-in-up effect
 const fadeInUp = {
@@ -142,6 +143,14 @@ export default function Portfolio() {
             {isDark ? <Sun className={styles.icon} /> : <Moon className={styles.icon} />}
           </Button>
         </div>
+        <motion.img
+        src={profilePic} // or use {profilePic} if imported
+        alt="Brandon Robinson"
+        className={styles.profilePhoto}
+        initial={{ opacity: 0, scale: 0.75 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      />
         {/* Name and Title */}
         <motion.h1
           className={styles.heroTitle}
@@ -242,19 +251,21 @@ export default function Portfolio() {
           {projects.map((project) => (
             <Card key={project.id}>
               <CardContent>
-                <motion.h3 className={styles.cardTitle} variants={fadeInUp}>
-                  {project.title}
-                </motion.h3>
-                <motion.p variants={fadeInUp}>
-                  {project.description}
-                </motion.p>
-                <Button variant="outline" onClick={() => {
-                  setSelectedProject(project)
-                }}>
+                <h3 className={styles.cardTitle}>{project.title}</h3>
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className={styles.projectImage}
+                />
+                <Button
+                  variant="outline"
+                  onClick={() => setSelectedProject(project)}
+                >
                   View More
                 </Button>
               </CardContent>
             </Card>
+
           ))}
         </motion.div>
 
@@ -282,7 +293,7 @@ export default function Portfolio() {
                 {selectedProject.github && (
                   <p className={styles.modalLink}>
                     <a href={selectedProject.github} target="_blank" rel="noopener noreferrer">
-                      View on GitHub
+                      <Github className={styles.icon} />
                     </a>
                   </p>
                 )}
@@ -293,14 +304,6 @@ export default function Portfolio() {
                       <span key={index} className={styles.stackTag}>{tech}</span>
                     ))}
                   </div>
-                )}
-                {/* Project Screenshot */}
-                {selectedProject.image && (
-                  <img
-                    src={selectedProject.image}
-                    alt={selectedProject.title}
-                    className={styles.modalImage}
-                  />
                 )}
                 {/* Project Challenges */}
                 {selectedProject.challenges && (
@@ -363,7 +366,7 @@ export default function Portfolio() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ 
+              transition={{
                 duration: 0.3,
                 height: {
                   duration: 0.4,
