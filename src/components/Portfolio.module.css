@@ -9,16 +9,19 @@
   background: #E8E9EB;  /* Light gray background */
   color: #1f2937;  /* Dark text color */
   padding: 1rem 2rem;  /* Padding around content */
+  transition: background-color 0.3s ease, color 0.3s ease;  /* Smooth transitions */
 }
 
 /* Dark Mode Styles */
 :global(html.dark) {
   background-color: #111827;  /* Dark background for dark mode */
+  transition: background-color 0.3s ease;  /* Smooth transition */
 }
 
 :global(html.dark) body {
   background-color: #111827;  /* Dark background for body */
   color: #f3f4f6;  /* Light text color for dark mode */
+  transition: background-color 0.3s ease, color 0.3s ease;  /* Smooth transitions */
 }
 
 :global(html.dark) .main {
@@ -29,6 +32,7 @@
 :global(html.dark) .card {
   background-color: #1f2937;  /* Darker background for cards */
   color: #f3f4f6;  /* Light text color */
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);  /* Darker shadow */
 }
 
 :global(html.dark) .button {
@@ -141,6 +145,7 @@
   border-radius: 1rem;  /* Rounded corners */
   padding: 1rem;  /* Internal padding */
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;  /* Smooth transitions */
 }
 
 .cardContent {
@@ -167,7 +172,7 @@
   padding: 0.5rem 1rem;  /* Internal padding */
   border-radius: 0.5rem;  /* Rounded corners */
   font-weight: 500;  /* Medium weight */
-  transition: background-color 0.2s ease;  /* Smooth background transition */
+  transition: all 0.3s ease;  /* Smooth transition for all properties */
 }
 
 .button:hover {
@@ -181,7 +186,7 @@
   color: #374151;  /* Text color */
   border-radius: 0.5rem;  /* Rounded corners */
   font-weight: 500;  /* Medium weight */
-  transition: all 0.2s ease;  /* Smooth transition for all properties */
+  transition: all 0.3s ease;  /* Smooth transition for all properties */
 }
 
 .buttonOutline:hover {
@@ -334,7 +339,7 @@
   padding: 0.5rem;  /* Internal padding */
   border-radius: 0.5rem;  /* Rounded corners */
   background-color: #f9fafb;  /* Light background */
-  transition: background-color 0.2s;  /* Smooth background transition */
+  transition: background-color 0.3s ease, color 0.3s ease;  /* Smooth transitions */
 }
 
 :global(html.dark) .courseItem {
@@ -404,6 +409,7 @@
   font-size: 0.75rem;  /* Small font size */
   padding: 0.25rem 0.5rem;  /* Internal padding */
   border-radius: 9999px;  /* Pill shape */
+  transition: background-color 0.3s ease, color 0.3s ease;  /* Smooth transitions */
 }
 
 :global(html.dark) .stackTag {
