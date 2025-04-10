@@ -4,6 +4,7 @@ import { Github, Linkedin, FileText, Sun, Moon, X } from "lucide-react"  // Icon
 import { motion, AnimatePresence, hover } from "framer-motion"  // Animation library
 import styles from "./Portfolio.module.css"  // CSS module for styling
 import ranks from "./ranks"  // Import rank images
+import profilePic from "../assets/profile.png"
 
 // Animation configuration for fade-in-up effect
 const fadeInUp = {
@@ -142,6 +143,14 @@ export default function Portfolio() {
             {isDark ? <Sun className={styles.icon} /> : <Moon className={styles.icon} />}
           </Button>
         </div>
+        <motion.img
+        src={profilePic} // or use {profilePic} if imported
+        alt="Brandon Robinson"
+        className={styles.profilePhoto}
+        initial={{ opacity: 0, scale: 0.75 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      />
         {/* Name and Title */}
         <motion.h1
           className={styles.heroTitle}
