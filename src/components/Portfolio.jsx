@@ -26,7 +26,7 @@ const CardContent = ({ children, className = "" }) => (
   <div className={`${styles.cardContent} ${className}`}>{children}</div>
 );
 
-const Button = ({ children, variant = "default", className = "", ...props }) => {
+const Button = ({ children, variant = "default", className = "", animate = true, ...props }) => {
   const styleMap = {
     default: styles.button,
     outline: styles.buttonOutline,
@@ -36,7 +36,7 @@ const Button = ({ children, variant = "default", className = "", ...props }) => 
     <motion.button
       className={`${styleMap[variant] || styleMap.default} ${className}`}
       {...props}
-      variants={fadeInUp}
+      variants={animate ? fadeInUp : undefined}
     >
       {children}
     </motion.button>
@@ -110,7 +110,7 @@ export default function Portfolio() {
         hidden: {},
         visible: {
           transition: {
-            staggerChildren: 0.25 // delay between children
+            staggerChildren: 0.3 // delay between children
           }
         }
       }}
@@ -142,7 +142,7 @@ export default function Portfolio() {
             hidden: {},
             visible: {
               transition: {
-                staggerChildren: 0.125
+                staggerChildren: 0.1
               }
             }
           }}
@@ -191,7 +191,7 @@ export default function Portfolio() {
         <motion.p
           variants={fadeInUp}
         >
-          I’m a U.S. Coast Guard Chief Information Systems Technician and full-time Computer Science major at Sonoma State University. With a background in cybersecurity, curriculum development, and IT infrastructure, I’m pivoting into software engineering and academic research in computer science.
+          I'm a U.S. Coast Guard Chief Information Systems Technician and full-time Computer Science major at Sonoma State University. With a background in cybersecurity, curriculum development, and IT infrastructure, I'm pivoting into software engineering and academic research in computer science.
         </motion.p>
       </motion.section>
 
@@ -209,7 +209,7 @@ export default function Portfolio() {
             hidden: {},
             visible: {
               transition: {
-                staggerChildren: 0.125
+                staggerChildren: 0.1
               }
             }
           }}
@@ -346,20 +346,26 @@ export default function Portfolio() {
         <AnimatePresence>
           {showCourses && (
             <motion.div
-              initial={{ opacity: 0, height: 0, overflow: "hidden" }}
-              animate={{ opacity: 1, height: "auto", overflow: "visible" }}
-              exit={{ opacity: 0, height: 0, overflow: "hidden" }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ 
+                duration: 0.3,
+                height: {
+                  duration: 0.4,
+                  ease: "easeInOut"
+                }
+              }}
             >
               <div className={styles.filterButtons}>
                 {categories.map(category => (
-                  <Button
+                  <button
                     key={category}
-                    variant={filter === category ? 'default' : 'outline'}
+                    className={`${filter === category ? styles.button : styles.buttonOutline}`}
                     onClick={() => setFilter(category)}
                   >
                     {category} ({getCategoryCount(category)})
-                  </Button>
+                  </button>
                 ))}
               </div>
               <ul className={styles.courseList}>
@@ -475,7 +481,7 @@ export default function Portfolio() {
             hidden: {},
             visible: {
               transition: {
-                staggerChildren: 0.125
+                staggerChildren: 0.1
               }
             }
           }}
@@ -593,7 +599,7 @@ const military = [
   {
     rank: "Seaman",
     title: "Seaman – Galveston, TX (2008–2009)",
-    description: "Early-career experience aboard a 210’ ship in the Gulf of Mexico and Caribbean. Maintained ship readiness and developed foundational maritime and IT skills."
+    description: "Early-career experience aboard a 210' ship in the Gulf of Mexico and Caribbean. Maintained ship readiness and developed foundational maritime and IT skills."
   }
 ];
 
@@ -621,7 +627,7 @@ const projects = [
     course: "Personal Project",
     challenges: [
       "Migrating from Tailwind to CSS Modules for full styling control",
-      "Deploying with GitHub Pages using Vite’s build pipeline",
+      "Deploying with GitHub Pages using Vite's build pipeline",
       "Creating a dynamic modal system for project content",
       "Integrating transcripts and auto-sorting course history"
     ],
