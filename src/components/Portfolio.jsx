@@ -182,7 +182,7 @@ export default function Portfolio() {
             href="https://github.com/confuzledandlost"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.icon}
+            className={styles.socialIcon}
             variants={fadeInUp}
           >
             <Github />
@@ -191,7 +191,7 @@ export default function Portfolio() {
             href="https://www.linkedin.com/in/brandon-robinson-uscg/"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.icon}
+            className={styles.socialIcon}
             variants={fadeInUp}
           >
             <Linkedin />
@@ -200,7 +200,7 @@ export default function Portfolio() {
             href="/Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.icon}
+            className={styles.socialIcon}
             variants={fadeInUp}
           >
             <FileText />
@@ -354,7 +354,10 @@ export default function Portfolio() {
         <motion.div className={styles.viewButtonContainer}
           variants={fadeInUp}
         >
-          <Button onClick={() => setShowCourses(!showCourses)}>
+          <Button 
+            variant={showCourses ? "default" : "outline"} 
+            onClick={() => setShowCourses(!showCourses)}
+          >
             {showCourses ? "Hide Course History" : "View Course History"}
           </Button>
         </motion.div>
@@ -446,7 +449,10 @@ export default function Portfolio() {
         <motion.div className={styles.resumeButtons}
           variants={fadeInUp}
         >
-          <Button onClick={() => setShowResume(!showResume)}>
+          <Button 
+            variant={showResume ? "default" : "outline"} 
+            onClick={() => setShowResume(!showResume)}
+          >
             {showResume ? "Hide Resume" : "View Resume"}
           </Button>
           <Button variant="outline">
@@ -518,7 +524,7 @@ export default function Portfolio() {
             href="https://github.com/confuzledandlost"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.icon}
+            className={styles.socialIcon}
             variants={fadeInUp}
           >
             <Github />
@@ -527,7 +533,7 @@ export default function Portfolio() {
             href="https://www.linkedin.com/in/brandon-robinson-uscg/"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.icon}
+            className={styles.socialIcon}
             variants={fadeInUp}
           >
             <Linkedin />
@@ -536,7 +542,7 @@ export default function Portfolio() {
             href="/Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.icon}
+            className={styles.socialIcon}
             variants={fadeInUp}
           >
             <FileText />

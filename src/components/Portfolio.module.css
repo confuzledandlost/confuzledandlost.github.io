@@ -85,9 +85,36 @@
 .iconRow {
   display: flex;  /* Flexbox layout */
   justify-content: center;  /* Center items horizontally */
-  gap: 1.25rem;  /* Space between items */
+  gap: 2rem;  /* Space between items */
   font-size: 1.5rem;  /* Large font size */
   margin-top: 1rem;  /* Top margin */
+}
+
+.socialIcon {
+  width: 2rem;  /* Larger width */
+  height: 2rem;  /* Larger height */
+  color: #374151;  /* Icon color */
+  transition: color 0.3s ease;  /* Smooth color transition */
+  display: flex;  /* Enable flexbox */
+  align-items: center;  /* Center vertically */
+  justify-content: center;  /* Center horizontally */
+}
+
+.socialIcon svg {
+  width: 100%;  /* Make SVG fill the container */
+  height: 100%;  /* Make SVG fill the container */
+}
+
+.socialIcon:hover {
+  color: #60a5fa;  /* Blue hover color */
+}
+
+:global(html.dark) .socialIcon {
+  color: #f3f4f6;  /* Light icon color */
+}
+
+:global(html.dark) .socialIcon:hover {
+  color: #60a5fa;  /* Light blue hover color */
 }
 
 .themeToggleRow {
@@ -177,6 +204,8 @@
   color: #4b5563;  /* Gray text color */
   padding: 0.5rem 1rem;  /* Internal padding */
   font-weight: 500;  /* Medium weight */
+  border: 1px solid #334155;  /* Border */
+  border-radius: 0.5rem;  /* Rounded corners */
 }
 
 .buttonGhost:hover {
