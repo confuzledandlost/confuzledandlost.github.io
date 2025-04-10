@@ -648,22 +648,6 @@ const projects = [
   },
   {
     id: 2,
-    title: "Personal Portfolio Website",
-    description: "A fully custom, dynamic, and mobile-responsive portfolio built with React and Vite. Showcases military experience, academic coursework, and software projects with clean modals and dark mode support.",
-    course: "Personal Project",
-    challenges: [
-      "Migrating from Tailwind to CSS Modules for full styling control",
-      "Deploying with GitHub Pages using Vite's build pipeline",
-      "Creating a dynamic modal system for project content",
-      "Integrating transcripts and auto-sorting course history"
-    ],
-    stack: ["React", "Vite", "CSS Modules", "Framer Motion", "GitHub Pages"],
-    github: "https://github.com/confuzledandlost/confuzledandlost.github.io",
-    image: "/images/projects/portfolio-site.png",
-    download: null
-  },
-  {
-    id: 3,
     title: "Make Simulator (C++)",
     description: "A simplified implementation of the UNIX `make` utility that builds a dependency graph, detects cycles, and executes shell commands based on a custom makefile format.",
     course: "CS 450 – Operating Systems",
@@ -678,6 +662,22 @@ const projects = [
     github: "https://github.com/confuzledandlost/Make_Simulator",
     image: "/images/projects/make-simulator.png",
     download: "/downloads/html-parser.zip"
+  },
+  {
+    id: 3,
+    title: "Personal Portfolio Website",
+    description: "A fully custom, dynamic, and mobile-responsive portfolio built with React and Vite. Showcases military experience, academic coursework, and software projects with clean modals and dark mode support.",
+    course: "Personal Project",
+    challenges: [
+      "Migrating from Tailwind to CSS Modules for full styling control",
+      "Deploying with GitHub Pages using Vite's build pipeline",
+      "Creating a dynamic modal system for project content",
+      "Integrating transcripts and auto-sorting course history"
+    ],
+    stack: ["React", "Vite", "CSS Modules", "Framer Motion", "GitHub Pages"],
+    github: "https://github.com/confuzledandlost/confuzledandlost.github.io",
+    image: "/images/projects/portfolio-site.png",
+    download: null
   }
 
 ];

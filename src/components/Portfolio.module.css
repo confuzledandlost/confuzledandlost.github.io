@@ -452,5 +452,5 @@
 }
 
 :global(html.dark) .profilePhoto {
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
 }
