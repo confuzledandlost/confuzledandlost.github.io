@@ -477,11 +477,11 @@
 }
 
 .profilePhoto {
-  width: 180px;
-  height: 256px;
-  border-radius: 50rem;
+  width: 220px;
+  height: 280px;
+  border-radius: 9999px;
   object-fit: cover;
-  object-position: 60% 20%;
+  object-position: 55% 45%;
   margin: 0 auto 1rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
