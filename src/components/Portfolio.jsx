@@ -250,7 +250,13 @@ export default function Portfolio() {
           {/* Project Cards */}
           {projects.map((project) => (
             <Card key={project.id}>
-              <CardContent>
+              <motion.div 
+                className={styles.cardContent}
+                onClick={() => setSelectedProject(project)}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                style={{ cursor: 'pointer' }}
+              >
                 <h3 className={styles.cardTitle}>{project.title}</h3>
                 <img
                   src={project.image}
@@ -259,13 +265,15 @@ export default function Portfolio() {
                 />
                 <Button
                   variant="outline"
-                  onClick={() => setSelectedProject(project)}
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent card click when button is clicked
+                    setSelectedProject(project);
+                  }}
                 >
-                  View More
+                  View Project Details
                 </Button>
-              </CardContent>
+              </motion.div>
             </Card>
-
           ))}
         </motion.div>
 
