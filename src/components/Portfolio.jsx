@@ -656,6 +656,23 @@ const projects = [
   },
   {
     id: 2,
+    title: "Maze Generator",
+    description: "This project generates and solves mazes using graph theory concepts. It creates a grid-based maze using different weight patterns, constructs a Minimum Spanning Tree (MST) using Kruskal's algorithm, and finds the shortest path from start to end. The maze can be generated with different patterns that affect the difficulty and structure of the maze.",
+    course: "CS 415 – Algorithm Analysis",
+    challenges: [
+      "Implementing Kruskal's algorithm for MST generation with Union-Find data structure",
+      "Designing multiple weight generation patterns for different maze types",
+      "Visualizing the maze and solution path in a grid format",
+      "Managing complex graph structures with vertices, edges, and adjacency lists",
+      "Handling different maze patterns and their specific weight generation rules"
+    ],
+    stack: ["C++", "Graph Theory", "Kruskal's Algorithm", "Union-Find", "Priority Queue"],
+    github: "https://github.com/confuzledandlost/Maze-Generator",
+    image: "/images/projects/maze-generator.png",
+    download: "/downloads/maze-generator.zip"
+  },
+  {
+    id: 3,
     title: "Lobo Shell",
     description: "A custom shell implementation that processes and executes user commands with support for piping, I/O redirection, and string handling. The shell features a robust tokenizer, command pipeline management, and file redirection capabilities, providing a Unix-like command-line experience.",
     course: "CS450: Operating Systems",
@@ -673,7 +690,7 @@ const projects = [
     download: "/downloads/lobo-shell.zip"
   },
   {
-    id: 3,
+    id: 4,
     title: "Make Simulator",
     description: "A simplified implementation of the UNIX `make` utility that builds a dependency graph, detects cycles, and executes shell commands based on a custom makefile format.",
     course: "CS 315 – Data Structures",
@@ -687,22 +704,6 @@ const projects = [
     stack: ["C++", "Makefile", "Dependency Graph", "Tokenizer", "System Calls"],
     github: "https://github.com/confuzledandlost/Make_Simulator",
     image: "/images/projects/make-simulator.png",
-    download: "/downloads/html-parser.zip"
-  },
-  {
-    id: 4,
-    title: "HTML Parser",
-    description: "This project parses and validates an HTML document, ensuring that all opening and closing tags are properly matched. It uses a custom tokenizer to identify tags and a stack to manage nesting.",
-    course: "CS 315 – Data Structures",
-    challenges: [
-      "Learning how HTML structure works with no prior HTML experience",
-      "Implementing a tokenizer (for the first time) to extract valid tag tokens",
-      "Managing tag state with a custom stack structure",
-      "Properly handling malformed tags and other nasty edge-cases."
-    ],
-    stack: ["C++", "Tokenizer", "Parser", "Custom Stack"],
-    github: "https://github.com/confuzledandlost/HTML_Parser",
-    image: "/images/projects/html-parser.png",
     download: "/downloads/html-parser.zip"
   },
   {
@@ -720,5 +721,22 @@ const projects = [
     github: "https://github.com/confuzledandlost/confuzledandlost.github.io",
     image: "/images/projects/portfolio-site.png",
     download: null
+  },
+  {
+    id: 6,
+    title: "HTML Parser",
+    description: "This project parses and validates an HTML document, ensuring that all opening and closing tags are properly matched. It uses a custom tokenizer to identify tags and a stack to manage nesting.",
+    course: "CS 315 – Data Structures",
+    challenges: [
+      "Learning how HTML structure works with no prior HTML experience",
+      "Implementing a tokenizer (for the first time) to extract valid tag tokens",
+      "Managing tag state with a custom stack structure",
+      "Properly handling malformed tags and other nasty edge-cases."
+    ],
+    stack: ["C++", "Tokenizer", "Parser", "Custom Stack"],
+    github: "https://github.com/confuzledandlost/HTML_Parser",
+    image: "/images/projects/html-parser.png",
+    download: "/downloads/html-parser.zip"
   }
+
 ];

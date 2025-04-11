@@ -477,11 +477,11 @@
 }
 
 .profilePhoto {
-  width: 256px;
+  width: 180px;
   height: 256px;
-  border-radius: 9999px; /* makes it a circle */
+  border-radius: 50rem;
   object-fit: cover;
-  object-position: 50% 25%; /* shifts the center point higher (30% from top) */
+  object-position: 60% 20%;
   margin: 0 auto 1rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
