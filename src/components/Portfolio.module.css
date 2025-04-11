@@ -481,7 +481,7 @@
   height: 256px;
   border-radius: 9999px; /* makes it a circle */
   object-fit: cover;
-  object-position: 50% 30%; /* shifts the center point higher (30% from top) */
+  object-position: 50% 25%; /* shifts the center point higher (30% from top) */
   margin: 0 auto 1rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
