@@ -144,13 +144,13 @@ export default function Portfolio() {
           </Button>
         </div>
         <motion.img
-        src={profilePic} // or use {profilePic} if imported
-        alt="Brandon Robinson"
-        className={styles.profilePhoto}
-        initial={{ opacity: 0, scale: 0.75 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      />
+          src={profilePic} // or use {profilePic} if imported
+          alt="Brandon Robinson"
+          className={styles.profilePhoto}
+          initial={{ opacity: 0, scale: 0.75 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        />
         {/* Name and Title */}
         <motion.h1
           className={styles.heroTitle}
@@ -354,8 +354,8 @@ export default function Portfolio() {
         <motion.div className={styles.viewButtonContainer}
           variants={fadeInUp}
         >
-          <Button 
-            variant={showCourses ? "default" : "outline"} 
+          <Button
+            variant={showCourses ? "default" : "outline"}
             onClick={() => setShowCourses(!showCourses)}
           >
             {showCourses ? "Hide Course History" : "View Course History"}
@@ -449,8 +449,8 @@ export default function Portfolio() {
         <motion.div className={styles.resumeButtons}
           variants={fadeInUp}
         >
-          <Button 
-            variant={showResume ? "default" : "outline"} 
+          <Button
+            variant={showResume ? "default" : "outline"}
             onClick={() => setShowResume(!showResume)}
           >
             {showResume ? "Hide Resume" : "View Resume"}
@@ -638,7 +638,60 @@ const military = [
 const projects = [
   {
     id: 1,
-    title: "HTML Parser (C++)",
+    title: "C-Like Interpreter",
+    description: "A modular interpreter for code written in Backus-Naur Form (BNF). The interpreter processes C-like code through six distinct stages: comment removal, tokenization, parsing, symbol table generation, abstract syntax tree creation, and full interpretation.",
+    course: "CS460: Programming Languages",
+    challenges: [
+      "Implementing a state-based tokenizer with multiple processing states",
+      "Building a recursive descent parser for BNF grammar",
+      "Creating a symbol table with scope management",
+      "Developing an abstract syntax tree generator",
+      "Designing a full interpreter with expression evaluation",
+      "Cross-platform compatibility between Windows and Unix systems"
+    ],
+    stack: ["C++", "ncurses", "Make", "GitHub Actions"],
+    github: "https://github.com/Pip-Install-Party/Interpreter",
+    image: "/images/projects/interpreter.png",
+    download: "/downloads/interpreter.zip"
+  },
+  {
+    id: 2,
+    title: "Lobo Shell",
+    description: "A custom shell implementation that processes and executes user commands with support for piping, I/O redirection, and string handling. The shell features a robust tokenizer, command pipeline management, and file redirection capabilities, providing a Unix-like command-line experience.",
+    course: "CS450: Operating Systems",
+    challenges: [
+      "Implementing a state-based tokenizer with support for quotes and special characters",
+      "Building a command pipeline system for handling multiple commands",
+      "Managing file descriptors and process handling for I/O redirection",
+      "Creating a robust command structure for argument handling",
+      "Implementing proper memory management and cleanup",
+      "Handling concurrent process execution with pipes"
+    ],
+    stack: ["C", "Make", "Unix System Calls", "Git"],
+    github: "https://github.com/confuzledandlost/Lobo_Shell",
+    image: "/images/projects/lobo-shell.png",
+    download: "/downloads/lobo-shell.zip"
+  },
+  {
+    id: 3,
+    title: "Make Simulator",
+    description: "A simplified implementation of the UNIX `make` utility that builds a dependency graph, detects cycles, and executes shell commands based on a custom makefile format.",
+    course: "CS 315 – Data Structures",
+    challenges: [
+      "Parsing custom makefile syntax using tokenization",
+      "Constructing and traversing a dependency graph",
+      "Detecting and preventing cyclic dependencies",
+      "Handling shell command execution with system calls",
+      "Timestamp validation for rebuild logic"
+    ],
+    stack: ["C++", "Makefile", "Dependency Graph", "Tokenizer", "System Calls"],
+    github: "https://github.com/confuzledandlost/Make_Simulator",
+    image: "/images/projects/make-simulator.png",
+    download: "/downloads/html-parser.zip"
+  },
+  {
+    id: 4,
+    title: "HTML Parser",
     description: "This project parses and validates an HTML document, ensuring that all opening and closing tags are properly matched. It uses a custom tokenizer to identify tags and a stack to manage nesting.",
     course: "CS 315 – Data Structures",
     challenges: [
@@ -653,24 +706,7 @@ const projects = [
     download: "/downloads/html-parser.zip"
   },
   {
-    id: 2,
-    title: "Make Simulator (C++)",
-    description: "A simplified implementation of the UNIX `make` utility that builds a dependency graph, detects cycles, and executes shell commands based on a custom makefile format.",
-    course: "CS 450 – Operating Systems",
-    challenges: [
-      "Parsing custom makefile syntax using tokenization",
-      "Constructing and traversing a dependency graph",
-      "Detecting and preventing cyclic dependencies",
-      "Handling shell command execution with system calls",
-      "Timestamp validation for rebuild logic"
-    ],
-    stack: ["C++17", "Makefile", "Dependency Graph", "Tokenizer", "System Calls"],
-    github: "https://github.com/confuzledandlost/Make_Simulator",
-    image: "/images/projects/make-simulator.png",
-    download: "/downloads/html-parser.zip"
-  },
-  {
-    id: 3,
+    id: 5,
     title: "Personal Portfolio Website",
     description: "A fully custom, dynamic, and mobile-responsive portfolio built with React and Vite. Showcases military experience, academic coursework, and software projects with clean modals and dark mode support.",
     course: "Personal Project",
@@ -685,5 +721,4 @@ const projects = [
     image: "/images/projects/portfolio-site.png",
     download: null
   }
-
 ];
