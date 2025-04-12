@@ -1,7 +1,6 @@
 /* Global Styles */
 :global(html) {
   scroll-behavior: smooth;  /* Smooth scrolling for the entire page */
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;  /* Modern font stack */
 }
 
 /* Main Layout */
@@ -11,7 +10,6 @@
   color: #1f2937;  /* Dark text color */
   padding: 1rem 2rem;  /* Padding around content */
   transition: background-color 0.3s ease, color 0.3s ease;  /* Smooth transitions */
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;  /* Modern font stack */
 }
 
 /* Dark Mode Styles */
@@ -73,23 +71,19 @@
 .sectionTitle {
   text-align: center;  /* Center text */
   font-size: 1.875rem;  /* Large font size */
-  font-weight: 700;  /* Bold weight */
+  font-weight: 600;  /* Semi-bold weight */
   margin-bottom: 1rem;  /* Bottom margin */
-  letter-spacing: -0.025em;  /* Slightly tighter letter spacing */
 }
 
 /* Hero Section */
 .heroTitle {
   font-size: 2.5rem;  /* Extra large font size */
-  font-weight: 700;  /* Bold weight */
-  letter-spacing: -0.025em;  /* Slightly tighter letter spacing */
+  font-weight: bold;  /* Bold weight */
 }
 
 .heroSubtitle {
   font-size: 1.25rem;  /* Large font size */
   margin-top: 0.5rem;  /* Top margin */
-  font-weight: 500;  /* Medium weight */
-  letter-spacing: -0.01em;  /* Slightly tighter letter spacing */
 }
 
 .iconRow {
@@ -111,8 +105,8 @@
 }
 
 .socialIcon svg {
-  width: 100%;  /* Make SVG fill the container */
-  height: 100%;  /* Make SVG fill the container */
+  width: 100%;  /* Make it fill the container */
+  height: 100%;  /* Make it fill the container */
 }
 
 .socialIcon:hover {
@@ -162,8 +156,7 @@
 
 .cardTitle {
   font-size: 1.25rem;  /* Large font size */
-  font-weight: 600;  /* Semi-bold weight */
-  letter-spacing: -0.01em;  /* Slightly tighter letter spacing */
+  font-weight: bold;  /* Bold weight */
 }
 
 .cardGrid {
@@ -302,6 +295,23 @@
   margin-top: 1rem;  /* Top margin */
 }
 
+.modalLink {
+  display: flex; /* Use flexbox for layout */
+  gap: 1rem; /* Add spacing between icons */
+  align-items: center; /* Align icons vertically */
+}
+
+.modalLink a {
+  color: #2563eb; /* Blue color for icons */
+  text-decoration: none; /* Remove underline */
+  font-size: 1.5rem; /* Adjust icon size */
+  transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.modalLink a:hover {
+  color: #1d4ed8; /* Darker blue on hover */
+}
+
 .list {
   list-style-type: disc;  /* Bullet points */
   margin-left: 1rem;  /* Left margin */
@@ -370,6 +380,13 @@
   overflow: hidden;  /* Hide overflow */
 }
 
+.resumeButtons {
+  display: flex; /* Fexbox for layout */
+  justify-content: center; /* Center the buttons horizontally */
+  gap: 1rem; /* Adds spacing between the buttons */
+  margin-top: 1rem; /* Adds top margin */
+}
+
 /* Military Experience Styles */
 .textCenter {
   text-align: center;  /* Center text */
@@ -398,7 +415,7 @@
 .modalImage {
   width: 100%;  /* Full width */
   max-height: 300px;  /* Maximum height */
-  object-fit: cover;  /* Cover container while maintaining aspect ratio */
+  object-fit: cover;  /* Cover container keeps aspect ratio */
   border-radius: 0.5rem;  /* Rounded corners */
   margin-top: 1rem;  /* Top margin */
 }
@@ -495,11 +512,4 @@
 
 :global(html.dark) .profilePhoto {
   box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
-}
-
-.resumeButtons {
-  display: flex;  /* Flexbox layout */
-  justify-content: center;  /* Center items horizontally */
-  gap: 1rem;  /* Space between buttons */
-  margin: 1rem 0;  /* Vertical margin */
 }
