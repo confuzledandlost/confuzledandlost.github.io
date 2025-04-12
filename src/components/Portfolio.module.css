@@ -477,9 +477,9 @@
 }
 
 .profilePhoto {
-  width: 220px;
-  height: 280px;
-  border-radius: 9999px;
+  width: 200px;
+  height: 256px;
+  border-radius: 1rem;
   object-fit: cover;
   object-position: 55% 45%;
   margin: 0 auto 1rem;

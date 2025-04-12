@@ -257,7 +257,9 @@ export default function Portfolio() {
                 whileTap={{ scale: 0.98 }}
                 style={{ cursor: 'pointer' }}
               >
-                <h3 className={styles.cardTitle}>{project.title}</h3>
+                <center>
+                  <h3 className={styles.cardTitle}>{project.title}</h3>
+                </center>
                 <img
                   src={project.image}
                   alt={project.title}
@@ -463,6 +465,7 @@ export default function Portfolio() {
           >
             {showResume ? "Hide Resume" : "View Resume"}
           </Button>
+          
           <Button variant="outline">
             <a
               href="/Resume.pdf"
@@ -635,11 +638,6 @@ const military = [
     rank: "IT3",
     title: "IT3 – Shipboard IT, Kodiak, AK (2009–2012)",
     description: "Managed full network and communications stack aboard a Coast Guard cutter in the Bering Sea. Supported classified networks and resolved system issues in extreme conditions."
-  },
-  {
-    rank: "Seaman",
-    title: "Seaman – Galveston, TX (2008–2009)",
-    description: "Early-career experience aboard a 210' ship in the Gulf of Mexico and Caribbean. Maintained ship readiness and developed foundational maritime and IT skills."
   }
 ];
 
