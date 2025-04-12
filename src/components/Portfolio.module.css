@@ -489,3 +489,10 @@
 :global(html.dark) .profilePhoto {
   box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
 }
+
+.resumeButtons {
+  display: flex;  /* Flexbox layout */
+  justify-content: center;  /* Center items horizontally */
+  gap: 1rem;  /* Space between buttons */
+  margin: 1rem 0;  /* Vertical margin */
+}
