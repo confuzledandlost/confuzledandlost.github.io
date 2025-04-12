@@ -257,7 +257,9 @@ export default function Portfolio() {
                 whileTap={{ scale: 0.98 }}
                 style={{ cursor: 'pointer' }}
               >
-                <h3 className={styles.cardTitle}>{project.title}</h3>
+                <center>
+                  <h3 className={styles.cardTitle}>{project.title}</h3>
+                </center>
                 <img
                   src={project.image}
                   alt={project.title}
