@@ -301,11 +301,16 @@ export default function Portfolio() {
                 <p className={styles.modalSubtitle}>Course: {selectedProject.course}</p>
                 {/* GitHub Link */}
                 {selectedProject.github && (
-                  <p className={styles.modalLink}>
+                  <div className={styles.modalLinks}>
                     <a href={selectedProject.github} target="_blank" rel="noopener noreferrer">
                       <Github className={styles.icon} />
                     </a>
-                  </p>
+                    {selectedProject.download && (
+                      <a href={selectedProject.download} download>
+                        <FileText className={styles.icon} />
+                      </a>
+                    )}
+                  </div>
                 )}
                 {/* Tech Stack Tags */}
                 {selectedProject.stack && (
@@ -324,18 +329,6 @@ export default function Portfolio() {
                         <li key={index}>{challenge}</li>
                       ))}
                     </ul>
-                  </div>
-                )}
-                {/* Download Link */}
-                {selectedProject.download && (
-                  <div className={styles.downloadLinkWrapper}>
-                    <a
-                      href={selectedProject.download}
-                      className={styles.downloadLink}
-                      download
-                    >
-                      Download Code (ZIP)
-                    </a>
                   </div>
                 )}
               </motion.div>
