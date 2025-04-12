@@ -295,21 +295,26 @@
   margin-top: 1rem;  /* Top margin */
 }
 
-.modalLink {
-  display: flex; /* Use flexbox for layout */
-  gap: 1rem; /* Add spacing between icons */
-  align-items: center; /* Align icons vertically */
+.modalLinks {
+  display: flex;  /* Use flexbox for layout */
+  gap: 1rem;  /* Add spacing between icons */
+  align-items: center;  /* Align icons vertically */
+  margin-top: 1rem;  /* Add some top margin */
 }
 
-.modalLink a {
-  color: #2563eb; /* Blue color for icons */
-  text-decoration: none; /* Remove underline */
-  font-size: 1.5rem; /* Adjust icon size */
-  transition: color 0.3s ease; /* Smooth hover effect */
+.modalLinks a {
+  color: #2563eb;  /* Blue color for icons */
+  text-decoration: none;  /* Remove underline */
+  transition: color 0.3s ease;  /* Smooth hover effect */
 }
 
-.modalLink a:hover {
-  color: #1d4ed8; /* Darker blue on hover */
+.modalLinks a:hover {
+  color: #1d4ed8;  /* Darker blue on hover */
+}
+
+.modalLinks .icon {
+  width: 1.5rem;  /* Set icon size */
+  height: 1.5rem;  /* Set icon size */
 }
 
 .list {
@@ -439,14 +444,6 @@
 :global(html.dark) .stackTag {
   background-color: #374151;  /* Dark background */
   color: #f3f4f6;  /* Light text color */
-}
-
-.modalLink a {
-  color: #2563eb;  /* Blue color */
-  text-decoration: underline;  /* Underlined text */
-  font-size: 0.9rem;  /* Font size */
-  margin-top: 0.75rem;  /* Top margin */
-  display: inline-block;  /* Inline block display */
 }
 
 .projectImage {
