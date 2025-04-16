@@ -62,7 +62,7 @@ export default function Portfolio() {
     const savedTheme = localStorage.getItem('theme')
     return savedTheme === null ? true : savedTheme === 'dark'
   })
-  const [profileLoaded, setProfileLoaded] = useState(false)
+
   const modalOpen = selectedProject !== null  // Helper for modal state
 
   // Effect for managing dark mode theme
@@ -147,9 +147,8 @@ export default function Portfolio() {
           src={profilePic} // or use {profilePic} if imported
           alt="Brandon Robinson"
           className={styles.profilePhoto}
-          onLoad={() => setProfileLoaded(true)}
           initial={{ opacity: 0, scale: 0.75 }}
-          animate={profileLoaded ? { opacity: 1, scale: 1 } : {}}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         />
         {/* Name and Title */}
@@ -251,7 +250,7 @@ export default function Portfolio() {
           {/* Project Cards */}
           {projects.map((project) => (
             <Card key={project.id}>
-              <motion.div
+              <motion.div 
                 className={styles.cardContent}
                 onClick={() => setSelectedProject(project)}
                 whileHover={{ scale: 1.02 }}
@@ -300,23 +299,18 @@ export default function Portfolio() {
                 <h3 className={styles.modalTitle}>{selectedProject.title}</h3>
                 <p>{selectedProject.description}</p>
                 <p className={styles.modalSubtitle}>Course: {selectedProject.course}</p>
-                {/* GitHub and Download Icons */}
+                {/* GitHub Link */}
                 {selectedProject.github && (
-                  <p className={styles.modalLinks}>
+                  <div className={styles.modalLinks}>
                     <a href={selectedProject.github} target="_blank" rel="noopener noreferrer">
                       <Github className={styles.icon} />
                     </a>
                     {selectedProject.download && (
-                      <a
-                        href={selectedProject.download}
-                        download
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                      <a href={selectedProject.download} download>
                         <FileText className={styles.icon} />
                       </a>
                     )}
-                  </p>
+                  </div>
                 )}
                 {/* Tech Stack Tags */}
                 {selectedProject.stack && (
@@ -464,7 +458,7 @@ export default function Portfolio() {
           >
             {showResume ? "Hide Resume" : "View Resume"}
           </Button>
-
+          
           <Button variant="outline">
             <a
               href="/Resume.pdf"

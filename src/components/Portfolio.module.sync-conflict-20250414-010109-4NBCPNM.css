@@ -1,7 +1,6 @@
 /* Global Styles */
 :global(html) {
   scroll-behavior: smooth;  /* Smooth scrolling for the entire page */
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;  /* Modern font stack */
 }
 
 /* Main Layout */
@@ -11,7 +10,6 @@
   color: #1f2937;  /* Dark text color */
   padding: 1rem 2rem;  /* Padding around content */
   transition: background-color 0.3s ease, color 0.3s ease;  /* Smooth transitions */
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;  /* Modern font stack */
 }
 
 /* Dark Mode Styles */
@@ -73,22 +71,19 @@
 .sectionTitle {
   text-align: center;  /* Center text */
   font-size: 1.875rem;  /* Large font size */
-  font-weight: 700;  /* Bold weight */
+  font-weight: 600;  /* Semi-bold weight */
   margin-bottom: 1rem;  /* Bottom margin */
-  letter-spacing: -0.025em;  /* Slightly tighter letter spacing */
 }
 
 /* Hero Section */
 .heroTitle {
   font-size: 2.5rem;  /* Extra large font size */
-  font-weight: 700;  /* Bold weight */
+  font-weight: bold;  /* Bold weight */
 }
 
 .heroSubtitle {
   font-size: 1.25rem;  /* Large font size */
   margin-top: 0.5rem;  /* Top margin */
-  letter-spacing: -0.01em;  /* Slightly tighter letter spacing */
-  font-weight: 500;  /* Medium weight */
 }
 
 .iconRow {
@@ -161,8 +156,7 @@
 
 .cardTitle {
   font-size: 1.25rem;  /* Large font size */
-  font-weight: 600;  /* Bold weight */
-  letter-spacing: -0.01em;  /* Slightly tighter letter spacing */
+  font-weight: bold;  /* Bold weight */
 }
 
 .cardGrid {
@@ -303,7 +297,7 @@
 
 .modalLinks {
   display: flex;  /* Use flexbox for layout */
-  gap: 1.5rem;  /* Add spacing between icons */
+  gap: 1rem;  /* Add spacing between icons */
   align-items: center;  /* Align icons vertically */
   margin-top: 1rem;  /* Add some top margin */
 }
@@ -510,12 +504,9 @@
   object-fit: cover;
   object-position: 55% 45%;
   margin: 0 auto 1rem;
-  display: block;
-  background-color: #f9fafb;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 :global(html.dark) .profilePhoto {
-  background-color: #0f172a;  /* Dark background */
   box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
 }
