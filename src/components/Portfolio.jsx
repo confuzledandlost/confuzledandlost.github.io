@@ -4,7 +4,7 @@ import { Github, Linkedin, FileText, Sun, Moon, X } from "lucide-react"  // Icon
 import { motion, AnimatePresence, hover } from "framer-motion"  // Animation library
 import styles from "./Portfolio.module.css"  // CSS module for styling
 import ranks from "./ranks"  // Import rank images
-import profilePic from "../assets/profile.png"
+import profilePic from "../assets/profile.webp"
 
 // Animation configuration for fade-in-up effect
 const fadeInUp = {
@@ -656,7 +656,7 @@ const projects = [
     ],
     stack: ["C++", "ncurses", "Make", "GitHub Actions"],
     github: "https://github.com/Pip-Install-Party/Interpreter",
-    image: "/images/projects/interpreter.png",
+    image: "/images/projects/interpreter.webp",
     download: "/downloads/interpreter.zip"
   },
   {
@@ -673,7 +673,7 @@ const projects = [
     ],
     stack: ["C++", "Graph Theory", "Kruskal's Algorithm", "Union-Find", "Priority Queue"],
     github: "https://github.com/confuzledandlost/Maze-Generator",
-    image: "/images/projects/maze-generator.png",
+    image: "/images/projects/maze-generator.webp",
     download: "/downloads/maze-generator.zip"
   },
   {
@@ -691,7 +691,7 @@ const projects = [
     ],
     stack: ["C", "Make", "Unix System Calls", "Git"],
     github: "https://github.com/confuzledandlost/Lobo_Shell",
-    image: "/images/projects/lobo-shell.png",
+    image: "/images/projects/lobo-shell.webp",
     download: "/downloads/lobo-shell.zip"
   },
   {
@@ -708,7 +708,7 @@ const projects = [
     ],
     stack: ["C++", "Makefile", "Dependency Graph", "Tokenizer", "System Calls"],
     github: "https://github.com/confuzledandlost/Make_Simulator",
-    image: "/images/projects/make-simulator.png",
+    image: "/images/projects/make-simulator.webp",
     download: "/downloads/html-parser.zip"
   },
   {
@@ -724,7 +724,7 @@ const projects = [
     ],
     stack: ["React", "Vite", "CSS Modules", "Framer Motion", "GitHub Pages"],
     github: "https://github.com/confuzledandlost/confuzledandlost.github.io",
-    image: "/images/projects/portfolio-site.png",
+    image: "/images/projects/portfolio-site.webp",
     download: null
   },
   {
@@ -740,7 +740,7 @@ const projects = [
     ],
     stack: ["C++", "Tokenizer", "Parser", "Custom Stack"],
     github: "https://github.com/confuzledandlost/HTML_Parser",
-    image: "/images/projects/html-parser.png",
+    image: "/images/projects/html-parser.webp",
     download: "/downloads/html-parser.zip"
   }
 
