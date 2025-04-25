@@ -254,8 +254,8 @@ export default function Portfolio() {
               <motion.div
                 className={styles.cardContent}
                 onClick={() => setSelectedProject(project)}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.90 }}
                 style={{ cursor: 'pointer' }}
               >
                 <center>

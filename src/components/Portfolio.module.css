@@ -34,7 +34,11 @@
 :global(html.dark) .card {
   background-color: #1f2937;  /* Darker background for cards */
   color: #f3f4f6;  /* Light text color */
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);  /* Darker shadow */
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);  /* Subtle glow effect */
+}
+
+:global(html.dark) .card:hover {
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);  /* Stronger glow on hover */
 }
 
 :global(html.dark) .button {
@@ -153,6 +157,10 @@
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;  /* Smooth transitions */
 }
 
+.card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);  /* Stronger shadow on hover */
+}
+
 .cardContent {
   display: flex;  /* Flexbox layout */
   flex-direction: column;  /* Vertical stacking */
@@ -215,24 +223,26 @@
   color: #4b5563;  /* Gray text color */
   padding: 0.5rem 1rem;  /* Internal padding */
   font-weight: 500;  /* Medium weight */
-  border: 1px solid #334155;  /* Border */
+  border: 3px solid #334155;  /* Border */
   border-radius: 0.5rem;  /* Rounded corners */
 }
 
 .buttonGhost:hover {
   background-color: #6b788d;  /* Dark background on hover */
+  border: 3px solid #334155;  /* Border */
   color: #111827;  /* Darker text on hover */
 }
 
 :global(html.dark) .buttonGhost {
   color: #f9fafb;  /* Light text color */
   background: transparent;  /* Transparent background */
-  border: 1px solid #334155;  /* Border */
+  border: 3px solid #334155;  /* Border */
   border-radius: 0.5rem;  /* Rounded corners */
 }
 
 :global(html.dark) .buttonGhost:hover {
   color: #e5e7eb;  /* Lighter text on hover */
+  border: 5px solid #334155;  /* Border */
   background-color: #1f2937;  /* Dark background on hover */
 }
 
