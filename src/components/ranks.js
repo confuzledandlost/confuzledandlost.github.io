@@ -5,4 +5,3 @@ import IT1 from '/images/ranks/it1.webp'
 import ITC from '/images/ranks/itc.webp'
 
 export default { Seaman, IT3, IT2, IT1, ITC }
-
