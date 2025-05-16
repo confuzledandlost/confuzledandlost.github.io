@@ -283,15 +283,19 @@ export default function Portfolio() {
         {/* Project Modal */}
         <AnimatePresence>
           {selectedProject && (
-            <motion.div className={styles.modalOverlay}
+            <motion.div 
+              className={styles.modalOverlay}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              onClick={() => setSelectedProject(null)}  // Close modal when clicking overlay
             >
-              <motion.div className={styles.modal}
+              <motion.div 
+                className={styles.modal}
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: 50, opacity: 0 }}
+                onClick={(e) => e.stopPropagation()}  // Prevent clicks inside modal from closing it
               >
                 <button onClick={() => setSelectedProject(null)} className={styles.modalClose}>
                   <X />
