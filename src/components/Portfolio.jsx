@@ -163,7 +163,7 @@ export default function Portfolio() {
           className={styles.heroSubtitle}
           variants={fadeInUp}
         >
-          Chief Information Systems Technician | Aspiring Software Engineer
+          IT Manager | UT Austin Graduate Student | Aspiring Software Engineer
         </motion.p>
         {/* Social Links */}
         <motion.div
@@ -222,7 +222,7 @@ export default function Portfolio() {
         <motion.p
           variants={fadeInUp}
         >
-          I'm a U.S. Coast Guard Chief Information Systems Technician and full-time Computer Science major at Sonoma State University. With a background in cybersecurity, curriculum development, and IT infrastructure, I'm pivoting into software engineering and academic research in computer science.
+          I'm a U.S. Coast Guard Chief Information Systems Technician and CS graduate student at UT Austin. With a background in cybersecurity, curriculum development, and IT infrastructure, I'm pivoting into software engineering and academic research in computer science.
         </motion.p>
       </motion.section>
 
@@ -361,7 +361,7 @@ export default function Portfolio() {
         <motion.p
           variants={fadeInUp}
         >
-          Throughout my IT career, I have obtained various CompTIA certifications like A+ and Net+, as well as Master Training Specialist for curriculum development. I am graduating from Sonoma State University with a Bachelor of Science in Computer Science with distinction and honors. Additionaly, while on active duty, I obtained a Bachelor of Science in Cybersecurity with an Applied Mathematics Minor and highest honors.
+          Throughout my IT career, I have obtained various CompTIA certifications like A+ and Net+, as well as Master Training Specialist for curriculum development. I graduated from Sonoma State University with a Bachelor of Science in Computer Science with distinction and honors. Additionaly, while on active duty, I obtained a Bachelor of Science in Cybersecurity with an Applied Mathematics Minor and highest honors from Southern New Hampshire Univserity.
         </motion.p>
         {/* Course History Toggle */}
         <motion.div className={styles.viewButtonContainer}
@@ -614,7 +614,12 @@ const courses = [
 const military = [
   {
     rank: "ITC",
-    title: "ITC – Curriculum Chief, Petaluma, CA (2022–Present)",
+    title: "ITC – IT Shop Chief, Corpus Christi, TX (2025–Present)",
+    description: "Supervised 10+ technicians in a 24/7/365 environment supporting over 1000 users across 10+ commands. Maintained and repaired all IT equipment and infrastructure. Provided tier 1/2 support for all IT related issues."
+  },
+  {
+    rank: "ITC",
+    title: "ITC – Curriculum Chief, Petaluma, CA (2022–2023)",
     description: "Oversaw and updated all apprentice-level training material for IT students. Led a curriculum overhaul aligning 40+ objectives with CompTIA and ACE standards. Piloted an AGILE-based fast-track program for experienced members to reduce training time."
   },
   {
