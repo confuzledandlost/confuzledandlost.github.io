@@ -615,7 +615,7 @@ const military = [
   {
     rank: "ITC",
     title: "ITC – IT Shop Chief, Corpus Christi, TX (2025–Present)",
-    description: "Supervised 10+ technicians in a 24/7/365 environment supporting over 1000 users across 10+ commands. Maintained and repaired all IT equipment and infrastructure. Provided tier 1/2 support for all IT related issues."
+    description: "Supervised 10+ technicians in a 24/7/365 environment supporting over 1000 users across more than 5 commands. Maintained and repaired all IT equipment and infrastructure in southwest Texas. Spearheaded IT infrastructure for Operation River Wall unit on the Rio Grande."
   },
   {
     rank: "ITC",
