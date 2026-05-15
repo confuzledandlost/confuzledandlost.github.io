@@ -1,3 +1,4 @@
+
 // Import necessary libraries and components
 import { useState, useEffect } from "react"  // React hooks for state management and side effects
 import { Github, Linkedin, FileText, Sun, Moon, X } from "lucide-react"  // Icon components
@@ -361,7 +362,7 @@ export default function Portfolio() {
         <motion.p
           variants={fadeInUp}
         >
-          Throughout my IT career, I have obtained various CompTIA certifications like A+ and Net+, as well as Master Training Specialist for curriculum development. I graduated from Sonoma State University with a Bachelor of Science in Computer Science with distinction and honors. Additionaly, while on active duty, I obtained a Bachelor of Science in Cybersecurity with an Applied Mathematics Minor and highest honors from Southern New Hampshire Univserity.
+          Throughout my IT career, I have obtained various CompTIA certifications like A+ and Net+, as well as Master Training Specialist for curriculum development. I graduated from Sonoma State University with a Bachelor of Science in Computer Science with distinction and honors. Additionaly, while on active duty, I obtained a Bachelor of Science in Cybersecurity with an Applied Mathematics Minor and highest honors from Southern New Hampshire Univserity. I'm currently pursuing a Master of Science in Computer Science at the University of Texas at Austin.
         </motion.p>
         {/* Course History Toggle */}
         <motion.div className={styles.viewButtonContainer}
