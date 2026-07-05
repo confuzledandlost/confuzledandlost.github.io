@@ -3,6 +3,7 @@ import IT3 from '/images/ranks/it3.png'
 import IT2 from '/images/ranks/it2.png'
 import IT1 from '/images/ranks/it1.png'
 import ITC from '/images/ranks/itc.png'
+import ISM2 from '/images/ranks/ism2.png'
 
-export default { Seaman, IT3, IT2, IT1, ITC }
+export default { Seaman, IT3, IT2, IT1, ITC, ISM2 }
 

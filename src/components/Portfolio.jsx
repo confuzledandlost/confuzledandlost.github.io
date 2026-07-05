@@ -1,3 +1,4 @@
+
 // Import necessary libraries and components
 import { useState, useEffect } from "react"  // React hooks for state management and side effects
 import { Github, Linkedin, FileText, Sun, Moon, X } from "lucide-react"  // Icon components
@@ -163,7 +164,7 @@ export default function Portfolio() {
           className={styles.heroSubtitle}
           variants={fadeInUp}
         >
-          Chief Information Systems Technician | Aspiring Software Engineer
+          IT Manager | UT Austin Graduate Student | Aspiring Software Engineer
         </motion.p>
         {/* Social Links */}
         <motion.div
@@ -222,7 +223,7 @@ export default function Portfolio() {
         <motion.p
           variants={fadeInUp}
         >
-          I'm a U.S. Coast Guard Chief Information Systems Technician and full-time Computer Science major at Sonoma State University. With a background in cybersecurity, curriculum development, and IT infrastructure, I'm pivoting into software engineering and academic research in computer science.
+          I'm a U.S. Coast Guard Chief Information Systems Technician and CS graduate student at UT Austin. With a background in cybersecurity, curriculum development, and IT infrastructure, I'm pivoting into software engineering and academic research in computer science.
         </motion.p>
       </motion.section>
 
@@ -361,7 +362,7 @@ export default function Portfolio() {
         <motion.p
           variants={fadeInUp}
         >
-          Throughout my IT career, I have obtained various CompTIA certifications like A+ and Net+, as well as Master Training Specialist for curriculum development. I am graduating from Sonoma State University with a Bachelor of Science in Computer Science with distinction and honors. Additionaly, while on active duty, I obtained a Bachelor of Science in Cybersecurity with an Applied Mathematics Minor and highest honors.
+          Throughout my IT career, I have obtained various CompTIA certifications like A+ and Net+, as well as Master Training Specialist for curriculum development. I graduated from Sonoma State University with a Bachelor of Science in Computer Science with distinction and honors. Additionaly, while on active duty, I obtained a Bachelor of Science in Cybersecurity with an Applied Mathematics Minor and highest honors from Southern New Hampshire Univserity. I'm currently pursuing a Master of Science in Computer Science at the University of Texas at Austin.
         </motion.p>
         {/* Course History Toggle */}
         <motion.div className={styles.viewButtonContainer}
@@ -581,6 +582,9 @@ const courses = [
   { code: "CYB 220", title: "Network Security", category: "Cybersecurity" },
   { code: "CYB 210", title: "Computer Networking", category: "Cybersecurity" },
   { code: "CYB 200", title: "Cybersecurity Foundations", category: "Cybersecurity" },
+  { code: "CS 380L", title: "Advanced Operating Systems", category: "Computer Science" },
+  { code: "CS 391M", title: "Case Studies in Machine Learning", category: "Computer Science" },
+  { code: "CS 394D", title: "Deep Learning (Computer Vision)", category: "Computer Science" },
   { code: "CS 496", title: "Senior Research Project", category: "Computer Science" },
   { code: "CS 495", title: "Quant Comp Sim & Visual Tutor", category: "Computer Science" },
   { code: "CS 460", title: "Programming Languages (C++)", category: "Computer Science" },
@@ -613,8 +617,18 @@ const courses = [
 
 const military = [
   {
+    rank: "CWO-2",
+    title: "ISM2 - Information Systems Manager, Portsmouth, VA (2026–Present)",
+    description: "Cryptology Afloat System - Sustainment Fleet Support Lead | COR-2"
+  },
+  {
     rank: "ITC",
-    title: "ITC – Curriculum Chief, Petaluma, CA (2022–Present)",
+    title: "ITC – IT Shop Chief, Corpus Christi, TX (2025–2026)",
+    description: "Supervised 10 technicians in a 24/7/365 environment supporting over 1,000 users across more than 5 different units. Maintained and repaired all IT equipment and infrastructure in southwest Texas. Planned and installed all new IT infrastructure for Operation River Wall unit on the Rio Grande."
+  },
+  {
+    rank: "ITC",
+    title: "ITC – Curriculum Chief, Petaluma, CA (2022–2023)",
     description: "Oversaw and updated all apprentice-level training material for IT students. Led a curriculum overhaul aligning 40+ objectives with CompTIA and ACE standards. Piloted an AGILE-based fast-track program for experienced members to reduce training time."
   },
   {
