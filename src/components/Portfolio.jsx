@@ -582,6 +582,9 @@ const courses = [
   { code: "CYB 220", title: "Network Security", category: "Cybersecurity" },
   { code: "CYB 210", title: "Computer Networking", category: "Cybersecurity" },
   { code: "CYB 200", title: "Cybersecurity Foundations", category: "Cybersecurity" },
+  { code: "CS 380L", title: "Advanced Operating Systems", category: "Computer Science" },
+  { code: "CS 391M", title: "Case Studies in Machine Learning", category: "Computer Science" },
+  { code: "CS 394D", title: "Deep Learning (Computer Vision)", category: "Computer Science" },
   { code: "CS 496", title: "Senior Research Project", category: "Computer Science" },
   { code: "CS 495", title: "Quant Comp Sim & Visual Tutor", category: "Computer Science" },
   { code: "CS 460", title: "Programming Languages (C++)", category: "Computer Science" },
@@ -614,9 +617,14 @@ const courses = [
 
 const military = [
   {
+    rank: "CWO-2",
+    title: "ISM2 - Information Systems Manager, Portsmouth, VA (2026–Present)",
+    description: "Cryptology Afloat System - Sustainment Fleet Support Lead | COR-2"
+  },
+  {
     rank: "ITC",
-    title: "ITC – IT Shop Chief, Corpus Christi, TX (2025–Present)",
-    description: "Supervised 10+ technicians in a 24/7/365 environment supporting over 1000 users across more than 5 commands. Maintained and repaired all IT equipment and infrastructure in southwest Texas. Spearheaded IT infrastructure for Operation River Wall unit on the Rio Grande."
+    title: "ITC – IT Shop Chief, Corpus Christi, TX (2025–2026)",
+    description: "Supervised 10 technicians in a 24/7/365 environment supporting over 1,000 users across more than 5 different units. Maintained and repaired all IT equipment and infrastructure in southwest Texas. Planned and installed all new IT infrastructure for Operation River Wall unit on the Rio Grande."
   },
   {
     rank: "ITC",
